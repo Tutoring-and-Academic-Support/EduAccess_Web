@@ -1,27 +1,26 @@
+<!-- header.component.html -->
 <header class="bg-gray-800 text-white py-4">
-    <div class="container mx-auto flex justify-between items-center">
-  
-      <!-- Logo -->
-      <div class="logo flex items-center">
-        <img src="https://i.imgur.com/0L0BkQ7.png" alt="Logo" class="h-12 rounded-full">
-      </div>
-  
-      <!-- Navegación dinámica -->
-      <nav class="flex flex-wrap items-center justify-center space-x-2 md:space-x-4">
-        <!-- Mostrar "Sobre Nosotros", "Registrarse" e "Iniciar sesión" si está en la página Home -->
-        <ng-container *ngIf="showHomeNav">
-          <a routerLink="/about" class="nav-link text-sm md:text-base">Sobre Nosotros</a>
-          <a routerLink="/auth/register" class="btn-green text-sm md:text-base">Registrarse</a>
-          <a routerLink="/auth/login" class="btn-blue text-sm md:text-base">Iniciar sesión</a>
-        </ng-container>
-  
-        <!-- Mostrar "Ir al Inicio" si está en Login o Register -->
-        <ng-container *ngIf="showAuthNav">
-          <a routerLink="/home" class="btn-green text-sm md:text-base">Ir al Inicio</a>
-        </ng-container>
+  <div class="container mx-auto flex justify-between items-center">
 
-      
-      </nav>
+    <!-- Logo -->
+    <div class="logo flex items-center">
+      <img src="https://i.imgur.com/0L0BkQ7.png" alt="Logo" class="h-12 rounded-full">
     </div>
-  </header>
-  
+
+    <!-- Navegación dinámica -->
+    <nav class="flex flex-wrap items-center justify-center space-x-2 md:space-x-4">
+      <!-- Mostrar "Home" "Sobre Nosotros", "Registrarse" e "Iniciar sesión" si showHomeNav es true -->
+      <ng-container *ngIf="showHomeNav">
+        <a routerLink="/home" class="btn-green text-sm md:text-base">Inicio</a>
+        <a routerLink="/about" class="nav-link text-sm md:text-base">Sobre Nosotros</a>
+        <a routerLink="/auth/register-tutor" class="btn-green text-sm md:text-base">Registrarse</a>
+        <a routerLink="/auth/login" class="btn-blue text-sm md:text-base">Iniciar sesión</a>
+      </ng-container>
+
+      <!-- Mostrar "Ir al Inicio" si showAuthNav es true -->
+      <ng-container *ngIf="showAuthNav">
+        <a routerLink="/home" class="btn-green text-sm md:text-base">Ir al Inicio</a>
+      </ng-container>
+    </nav>
+  </div>
+</header>
