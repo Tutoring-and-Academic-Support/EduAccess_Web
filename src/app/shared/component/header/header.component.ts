@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+/*import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, RouterLink, RouterOutlet } from '@angular/router';
 //import { MatMenuModule } from '@angular/material/menu'; // Para mat-menu
@@ -36,4 +36,51 @@ export class HeaderComponent {
     localStorage.removeItem('token');
     this.router.navigate(['/home']);
   }
+}*/
+
+import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router, RouterModule, NavigationEnd,RouterLink,RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { AuthService } from '../../../core/service/auth.service'; 
+
+@Component({
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
+  standalone: true,
+  imports: [
+    RouterLink,
+    RouterOutlet,
+    CommonModule,
+    RouterModule
+  ],
+})
+export class HeaderComponent implements OnInit {
+  private authService = inject(AuthService);
+  showHomeNav: boolean = true;
+  showAuthNav: boolean = false;
+  
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      // Determinar si la ruta es de autenticación
+      if (event.url.startsWith('/auth')) {
+        this.showHomeNav = false;
+        this.showAuthNav = true;
+      } else {
+        this.showHomeNav = true;
+        this.showAuthNav = false;
+      }
+    });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/auth/login']);
+  }
 }
+

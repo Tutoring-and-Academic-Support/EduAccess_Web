@@ -1,4 +1,3 @@
-<!-- header.component.html -->
 <header class="bg-gray-800 text-white py-4">
   <div class="container mx-auto flex justify-between items-center">
 
@@ -9,7 +8,7 @@
 
     <!-- Navegación dinámica -->
     <nav class="flex flex-wrap items-center justify-center space-x-2 md:space-x-4">
-      <!-- Mostrar "Home" "Sobre Nosotros", "Registrarse" e "Iniciar sesión" si showHomeNav es true -->
+      <!-- Mostrar "Home", "Sobre Nosotros", "Registrarse" e "Iniciar sesión" si showHomeNav es true -->
       <ng-container *ngIf="showHomeNav">
         <a routerLink="/home" class="btn-green text-sm md:text-base">Inicio</a>
         <a routerLink="/about" class="nav-link text-sm md:text-base">Sobre Nosotros</a>
@@ -17,9 +16,10 @@
         <a routerLink="/auth/login" class="btn-blue text-sm md:text-base">Iniciar sesión</a>
       </ng-container>
 
-      <!-- Mostrar "Ir al Inicio" si showAuthNav es true -->
+      <!-- Mostrar "Ir al Inicio" y "Cerrar Sesión" si showAuthNav es true -->
       <ng-container *ngIf="showAuthNav">
         <a routerLink="/home" class="btn-green text-sm md:text-base">Ir al Inicio</a>
+       <!-- <button (click)="logout()" class="btn-red text-sm md:text-base">Cerrar Sesión</button>-->
       </ng-container>
     </nav>
   </div>

@@ -1,1 +1,56 @@
-<p>login works!</p>
+<!-- login.component.html -->
+<div class="min-h-screen flex items-center justify-center bg-gray-200">
+    <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md space-y-6">
+      <h2 class="text-2xl font-bold text-center">Iniciar Sesión</h2>
+  
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Campo: Correo Electrónico -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Correo electrónico</span>
+          </label>
+          <input
+            type="email"
+            placeholder="correo@ejemplo.com"
+            class="input input-bordered w-full"
+            formControlName="email"
+          />
+          <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-red-500 text-sm">
+            Introduce un correo electrónico válido.
+          </div>
+        </div>
+  
+        <!-- Campo: Contraseña -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Contraseña</span>
+          </label>
+          <input
+            type="password"
+            placeholder="********"
+            class="input input-bordered w-full"
+            formControlName="password"
+          />
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-red-500 text-sm">
+            La contraseña es obligatoria.
+          </div>
+        </div>
+  
+        <!-- Botón: Iniciar Sesión -->
+        <button class="btn btn-blue w-full mt-4" type="submit" [disabled]="loginForm.invalid">
+          <i class="fa fa-sign-in-alt mr-2"></i> INICIAR SESIÓN
+        </button>
+      </form>
+  
+      <!-- Enlace: Registrarse -->
+      <p class="text-center text-sm mt-4">
+        ¿No tienes cuenta? <a routerLink="/auth/register-tutor" class="text-blue-600">Regístrate aquí</a>
+      </p>
+    </div>
+  
+    <!-- Botón: Volver -->
+    <button class="btn btn-success absolute top-4 left-4" (click)="router.navigate(['/'])">
+      <i class="fa fa-arrow-left"></i> VOLVER
+    </button>
+  </div>
+  

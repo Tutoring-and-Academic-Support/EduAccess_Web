@@ -1,0 +1,26 @@
+header {
+    .nav-link, .btn-green, .btn-blue, .btn-red {
+      margin-right: 10px;
+      text-decoration: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+    }
+  
+    .btn-green {
+      background-color: #28a745;
+    }
+  
+    .btn-blue {
+      background-color: #007bff;
+    }
+  
+    .btn-red {
+      background-color: #dc3545;
+    }
+  
+    .nav-link:hover, .btn-green:hover, .btn-blue:hover, .btn-red:hover {
+      opacity: 0.8;
+    }
+  }
+  
