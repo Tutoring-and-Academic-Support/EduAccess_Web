@@ -1,0 +1,31 @@
+<div class="p-6 max-w-md mx-auto">
+  <h2 class="text-xl font-bold mb-4 text-center text-gray-800">Publicar Comentario</h2>
+
+  <form
+    (ngSubmit)="submitComment()"
+    class="flex flex-col gap-4 bg-base-100 p-4 rounded-lg shadow-lg"
+  >
+    <!-- Comentario -->
+    <textarea
+      [(ngModel)]="comment.content"
+      name="content"
+      placeholder="Escribe tu comentario aquí"
+      class="textarea textarea-bordered w-full"
+      required
+    ></textarea>
+
+    <button type="submit" class="btn btn-primary">
+      Publicar Comentario
+    </button>
+  </form>
+
+  <!-- Notificación de éxito -->
+  <div *ngIf="notification" class="alert alert-success mt-4">
+    {{ notification }}
+  </div>
+
+  <!-- Notificación de error -->
+  <div *ngIf="error" class="alert alert-error mt-4">
+    {{ error }}
+  </div>
+</div>
