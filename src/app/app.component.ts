@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {FooterComponent} from './shared/footer/footer.component';
-import {CarouselComponent} from './shared/carousel/carousel.component';
+import {CarouselComponent} from './component/carousel/carousel.component';
 import {HeaderComponent} from './shared/header/header.component';
 
 @Component({

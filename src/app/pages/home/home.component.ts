@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import {CarouselComponent} from '../../shared/carousel/carousel.component';
+import {CarouselComponent} from '../../component/carousel/carousel.component';
+import {CommentComponent} from '../../component/comment/comment.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    CarouselComponent
+    CarouselComponent,
+    CommentComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

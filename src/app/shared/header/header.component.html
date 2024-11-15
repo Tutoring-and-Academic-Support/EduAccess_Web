@@ -2,9 +2,13 @@
   <div class="container mx-auto flex justify-between items-center">
 
     <!-- Logo -->
-    <div class="logo flex items-center">
-      <img src="https://i.imgur.com/0L0BkQ7.png" alt="Logo" class="h-12 rounded-full">
-    </div>
+    <ng-container>
+      <a routerLink="/home" class="flex items-center hover:scale-105 transition-transform">
+        <span class="ml-2 text-sm md:text-base text-green-600 font-semibold">
+          <img src="https://i.imgur.com/0L0BkQ7.png" alt="Logo" class="h-20 w-50 rounded-full">
+        </span>
+      </a>
+    </ng-container>
 
     <!-- Navegación dinámica -->
     <nav class="flex flex-wrap items-center justify-center space-x-2 md:space-x-4">
