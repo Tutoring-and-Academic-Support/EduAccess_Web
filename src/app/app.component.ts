@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule, RouterOutlet, Router } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +11,5 @@ import { RouterModule, RouterOutlet, Router } from '@angular/router';
 export class AppComponent {
   title = 'EduAccess_Web';
   showHeaderAndFooter = true;
-
-  constructor(private router: Router) {
-    // Suscríbete a los cambios de ruta
-    this.router.events.subscribe(() => {
-      // Verifica si la ruta actual es "register-tutor"
-      this.showHeaderAndFooter = !this.router.url.includes('register-tutor');
-    });
-  }
+  
 }

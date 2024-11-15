@@ -1,8 +1,9 @@
 export interface RegisterTutorResponse{
     id:number;
-    nombre: String;
-    apellidos : String;
-    email:string;
-    departamento: String;
+    nombre: string;
+    apellidos : string;
+    email: string;
+    departamento:  string;
+    role: string;
   }
   

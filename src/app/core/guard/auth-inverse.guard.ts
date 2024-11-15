@@ -1,27 +1,54 @@
+// auth-inverse.guard.ts
 /*import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from '../service/auth.service
+import { AuthService } from '../service/auth.service';
 import { inject } from '@angular/core';
 
 export const authInverseGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // Verifica si el usuario está autenticado
   if (authService.isAuthenticated()) {
-    // Obtiene el rol del usuario
-    const userRole = authService.getUserRole();
+    const userRole = authService.getUser()?.role;
 
-    // Redirige según el rol del usuario
-    if (userRole === 'AUTHOR') {
-      router.navigate(['/author']); // Redirige a la página de autores
-    } else if (userRole === 'CUSTOMER') {
-      router.navigate(['/customer']); // Redirige a la página de clientes
+    if (userRole === 'TUTOR') {
+      router.navigate(['/tutor']);
+    } else if (userRole === 'ESTUDIANTE') {
+      router.navigate(['/student']);
+    } else {
+      router.navigate(['/home']);
     }
 
-    // Bloquea el acceso a las rutas de autenticación si el usuario está autenticado
     return false;
   }
 
-  // Permite el acceso a la ruta si el usuario no está autenticado
   return true;
 };*/
+
+// src/app/core/guard/auth-inverse.guard.ts
+// src/app/core/guard/auth-inverse.guard.ts
+import { Injectable } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
+import { AuthService } from '../service/auth.service';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthInverseGuard implements CanActivate {
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  canActivate(): Observable<boolean> | Promise<boolean> | boolean {
+    // Si el usuario ya está autenticado, redirígelo al dashboard o a la página principal
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/login']); // O la ruta que quieras redirigir
+      return false;
+    } else {
+      return true; // Permite acceso a login o registro si no está autenticado
+    }
+  }
+}
+
+
+
+

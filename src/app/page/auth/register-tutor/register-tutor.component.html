@@ -86,7 +86,11 @@
         </div>
       </div>
 
-      <!-- Campo: Plan de Suscripción -->
+      <div class="form-control mb-4">
+        <input type="hidden" formControlName="role" value="TUTOR" />
+      </div>
+
+      <!-- Campo: Plan de Suscripción
       <div class="form-control mb-4">
         <label class="label">
           <span class="label-text text-gray-600">Selecciona un Plan de Suscripción*</span>
@@ -100,7 +104,7 @@
         <div *ngIf="registerForm.get('planSeleccionado')?.invalid && registerForm.get('planSeleccionado')?.touched" class="text-red-500 text-sm">
           Selecciona un plan de suscripción.
         </div>
-      </div>
+      </div>-->
 
       <!-- Botón: Registrarse -->
       <button class="btn btn-success w-full mt-4" type="submit" [disabled]="registerForm.invalid">

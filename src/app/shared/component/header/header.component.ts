@@ -38,45 +38,39 @@ export class HeaderComponent {
   }
 }*/
 
-import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router, RouterModule, NavigationEnd, RouterLink, RouterOutlet } from '@angular/router';
+// shared/header/header.component.ts
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { AuthService } from '../../../core/service/auth.service';
 import { filter } from 'rxjs/operators';
-import { AuthService } from '../../../core/service/auth.service'; 
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [
-    RouterLink,
-    RouterOutlet,
-    CommonModule,
-    RouterModule
-  ],
 })
 export class HeaderComponent implements OnInit {
-  private authService = inject(AuthService);
-  showHomeNav: boolean = true;
-  showAuthNav: boolean = false;
-  isMobileMenuOpen: boolean = false; // Nuevo estado para el menú móvil
+  isAuthenticated: boolean = false;
+  userRole: string | null = null;
+  isMobileMenuOpen: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    // Cambia el estado de navegación según la ruta actual
+    this.updateAuthStatus();
+
+    // Suscribirse a cambios en la navegación para actualizar el estado de autenticación
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      if (event.url.startsWith('/auth')) {
-        this.showHomeNav = false;
-        this.showAuthNav = true;
-      } else {
-        this.showHomeNav = true;
-        this.showAuthNav = false;
-      }
+    ).subscribe(() => {
+      this.updateAuthStatus();
     });
+  }
+
+  updateAuthStatus() {
+    this.isAuthenticated = this.authService.isAuthenticated();
+    this.userRole = this.authService.getUserRole();
   }
 
   logout() {
@@ -84,10 +78,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/auth/login']);
   }
 
-  // Función para alternar el menú móvil
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 }
-
 

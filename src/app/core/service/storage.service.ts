@@ -24,10 +24,41 @@ export class StorageService {
   clearAuthData(): void {
     localStorage.removeItem(this.authKey);
   }
-}*/
+}
 
+
+// storage.service.ts
 import { Injectable } from '@angular/core';
-import { AuthResponse } from '../../shared/model/auth-response.model'; // Actualiza la ruta si es necesario
+import { AuthResponse } from '../../shared/model/auth-response.model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class StorageService {
+
+  private readonly TOKEN_KEY = 'authData';
+
+  constructor() { }
+
+  setAuthData(data: AuthResponse): void {
+    localStorage.setItem(this.TOKEN_KEY, JSON.stringify(data));
+  }
+
+  getAuthData(): AuthResponse | null {
+    const data = localStorage.getItem(this.TOKEN_KEY);
+    return data ? JSON.parse(data) : null;
+  }
+
+  clearAuthData(): void {
+    localStorage.removeItem(this.TOKEN_KEY);
+  }
+}
+
+ */
+
+// src/app/core/service/storage.service.ts
+import { Injectable } from '@angular/core';
+import { AuthResponse } from '../../shared/model/auth-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -53,4 +84,3 @@ export class StorageService {
     localStorage.removeItem(this.authKey);
   }
 }
-
