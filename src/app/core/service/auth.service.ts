@@ -6,13 +6,15 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { AuthResponse } from '../../shared/model/auth-response.model';
 import { StorageService } from './storage.service';
+import { RegisterTutorRequest } from '../../shared/model/register-request.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private apiURL = `${environment.baseURL}/auth`;
-  private api_URL = `${environment.baseURL}/registrar`;
+  private api_dos_URL = `${environment.baseURL}/registrar`;
+  
   constructor(
     private http: HttpClient,
     private storageService: StorageService
@@ -30,9 +32,8 @@ export class AuthService {
 
   // Método de registro para el tutor
   registerTutor(tutorData: any): Observable<any> {
-    return this.http.post(`${this.api_URL}/tutor`, tutorData);
+    return this.http.post(`${this.api_dos_URL}/tutor`, tutorData, {  responseType: 'text'  });
   }
-
   // Almacenar los datos de autenticación
   saveAuthData(data: AuthResponse): void {
     this.storageService.setAuthData(data);
