@@ -40,7 +40,7 @@ export class HeaderComponent {
 
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule, NavigationEnd,RouterLink,RouterOutlet } from '@angular/router';
+import { Router, RouterModule, NavigationEnd, RouterLink, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AuthService } from '../../../core/service/auth.service'; 
 
@@ -60,14 +60,15 @@ export class HeaderComponent implements OnInit {
   private authService = inject(AuthService);
   showHomeNav: boolean = true;
   showAuthNav: boolean = false;
-  
-  constructor(private router: Router) { }
+  isMobileMenuOpen: boolean = false; // Nuevo estado para el menú móvil
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
+    // Cambia el estado de navegación según la ruta actual
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
-      // Determinar si la ruta es de autenticación
       if (event.url.startsWith('/auth')) {
         this.showHomeNav = false;
         this.showAuthNav = true;
@@ -82,5 +83,11 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/auth/login']);
   }
+
+  // Función para alternar el menú móvil
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
 }
+
 

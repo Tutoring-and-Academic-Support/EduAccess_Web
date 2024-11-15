@@ -1,17 +1,19 @@
 <!-- register-tutor.component.html -->
-<div class="min-h-screen flex items-center justify-center bg-green-500">
-  <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md space-y-6">
-    <h2 class="text-2xl font-bold text-center">Registrarse como Tutor</h2>
+<div class="min-h-screen bg-[#28a745] flex items-center justify-center">
+  <!-- Contenedor del formulario -->
+  <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
+    <!-- Título centralizado -->
+    <h2 class="text-4xl font-semibold text-gray-700 text-center mb-6">Registrarse</h2>
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <!-- Campo: Nombre Completo -->
-      <div class="form-control">
+      <div class="form-control mb-4">
         <label class="label">
-          <span class="label-text">Nombre completo*</span>
+          <span class="label-text text-gray-600">Nombre completo*</span>
         </label>
         <input
           type="text"
-          placeholder="Juan Jesús López Gutiérrez"
+          placeholder="Juan Jesús"
           class="input input-bordered w-full"
           formControlName="nombre"
         />
@@ -21,9 +23,9 @@
       </div>
 
       <!-- Campo: Apellidos -->
-      <div class="form-control">
+      <div class="form-control mb-4">
         <label class="label">
-          <span class="label-text">Apellidos*</span>
+          <span class="label-text text-gray-600">Apellidos*</span>
         </label>
         <input
           type="text"
@@ -37,9 +39,9 @@
       </div>
 
       <!-- Campo: Correo Electrónico -->
-      <div class="form-control">
+      <div class="form-control mb-4">
         <label class="label">
-          <span class="label-text">Correo electrónico*</span>
+          <span class="label-text text-gray-600">Correo electrónico*</span>
         </label>
         <input
           type="email"
@@ -53,9 +55,9 @@
       </div>
 
       <!-- Campo: Contraseña -->
-      <div class="form-control">
+      <div class="form-control mb-4">
         <label class="label">
-          <span class="label-text">Contraseña*</span>
+          <span class="label-text text-gray-600">Contraseña*</span>
         </label>
         <input
           type="password"
@@ -68,10 +70,26 @@
         </div>
       </div>
 
-      <!-- Campo: Selección de Plan -->
-      <div class="form-control">
+      <!-- Campo: Departamento -->
+      <div class="form-control mb-4">
         <label class="label">
-          <span class="label-text">Selecciona un Plan de Suscripción*</span>
+          <span class="label-text text-gray-600">Selecciona Departamento al que pertenece*</span>
+        </label>
+        <select class="select select-bordered w-full" formControlName="departamento">
+          <option disabled selected>Selecciona un departamento</option>
+          <option value="ingenieria sistema">Ingeniería de sistemas</option>
+          <option value="electronica">Electrónica</option>
+          <option value="otro">Otro</option>
+        </select>
+        <div *ngIf="registerForm.get('departamento')?.invalid && registerForm.get('departamento')?.touched" class="text-red-500 text-sm">
+          Selecciona un departamento.
+        </div>
+      </div>
+
+      <!-- Campo: Plan de Suscripción -->
+      <div class="form-control mb-4">
+        <label class="label">
+          <span class="label-text text-gray-600">Selecciona un Plan de Suscripción*</span>
         </label>
         <select class="select select-bordered w-full" formControlName="planSeleccionado">
           <option disabled selected>Selecciona un plan</option>

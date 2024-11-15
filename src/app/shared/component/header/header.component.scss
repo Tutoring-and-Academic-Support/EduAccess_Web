@@ -1,26 +1,15 @@
 header {
-    .nav-link, .btn-green, .btn-blue, .btn-red {
-      margin-right: 10px;
-      text-decoration: none;
-      color: white;
-      padding: 8px 16px;
-      border-radius: 4px;
+    .hover\:text-yellow-400:hover {
+      color: #fbbf24; /* Cambia a amarillo cuando se pasa el ratón */
     }
-  
-    .btn-green {
-      background-color: #28a745;
+    .transition-colors {
+      transition: color 0.3s;
     }
-  
-    .btn-blue {
-      background-color: #007bff;
+    .shadow-lg {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     }
-  
-    .btn-red {
-      background-color: #dc3545;
-    }
-  
-    .nav-link:hover, .btn-green:hover, .btn-blue:hover, .btn-red:hover {
-      opacity: 0.8;
+    button:focus {
+      outline: none;
     }
   }
   
