@@ -1,0 +1,86 @@
+<div class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+  <h2 class="text-2xl font-bold mb-6 text-gray-800">Información básica</h2>
+
+  <!-- Información Básica -->
+  <div class="space-y-4">
+    <!-- Nombre Completo -->
+    <div class="flex justify-between items-center border-b pb-3">
+      <span class="font-semibold text-gray-600">Nombre completo</span>
+      <input
+        type="text"
+        [(ngModel)]="profile.name"
+        class="input input-bordered w-full max-w-xs"
+        placeholder="Ingresa tu nombre completo"
+        required />
+    </div>
+
+    <!-- Correo Electrónico -->
+    <div class="flex justify-between items-center border-b pb-3">
+      <span class="font-semibold text-gray-600">Dirección de correo electrónico</span>
+      <input
+        type="email"
+        [(ngModel)]="profile.email"
+        class="input input-bordered w-full max-w-xs"
+        placeholder="Correo electrónico"
+        disabled />
+    </div>
+
+    <!-- ID de Alumno -->
+    <div class="flex justify-between items-center border-b pb-3">
+      <span class="font-semibold text-gray-600">ID de alumno</span>
+      <span class="text-gray-700">{{ profile.studentId }}</span>
+    </div>
+
+    <!-- Cambiar Contraseña -->
+    <div class="flex justify-between items-center border-b pb-3">
+      <span class="font-semibold text-gray-600">Contraseña</span>
+      <a href="#" (click)="openChangePasswordModal()" class="text-blue-600 hover:underline">Cambiar contraseña</a>
+    </div>
+  </div>
+
+  <!-- Botón de Guardar Cambios -->
+  <div class="mt-6 text-center">
+    <button class="btn btn-primary" (click)="submitProfile()">Guardar Cambios</button>
+  </div>
+
+  <!-- Notificaciones -->
+  <div *ngIf="notification" class="alert alert-success mt-4">
+    {{ notification }}
+  </div>
+  <div *ngIf="error" class="alert alert-error mt-4">
+    {{ error }}
+  </div>
+
+  <!-- Modal para Cambiar Contraseña -->
+  <div *ngIf="isPasswordModalOpen" class="modal modal-open">
+    <div class="modal-box">
+      <h3 class="font-bold text-lg">Cambiar Contraseña</h3>
+      <div class="py-4 space-y-3">
+        <input
+          type="password"
+          [(ngModel)]="passwordData.currentPassword"
+          placeholder="Contraseña actual"
+          class="input input-bordered w-full"
+          required />
+
+        <input
+          type="password"
+          [(ngModel)]="passwordData.newPassword"
+          placeholder="Nueva contraseña"
+          class="input input-bordered w-full"
+          required />
+
+        <input
+          type="password"
+          [(ngModel)]="passwordData.confirmPassword"
+          placeholder="Confirmar nueva contraseña"
+          class="input input-bordered w-full"
+          required />
+      </div>
+      <div class="modal-action">
+        <button class="btn btn-primary" (click)="changePassword()">Guardar</button>
+        <button class="btn" (click)="closeChangePasswordModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
