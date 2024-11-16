@@ -1,0 +1,125 @@
+<!-- register-tutor.component.html -->
+<div class="min-h-screen bg-[#28a745] flex items-center justify-center">
+  <!-- Contenedor del formulario -->
+  <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
+    <!-- Título centralizado -->
+    <h2 class="text-4xl font-semibold text-gray-700 text-center mb-6">Registrarse</h2>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <!-- Campo: Nombre Completo -->
+      <div class="form-control mb-4">
+        <label class="label">
+          <span class="label-text text-gray-600">Nombre completo*</span>
+        </label>
+        <input
+          type="text"
+          placeholder="Juan Jesús"
+          class="input input-bordered w-full"
+          formControlName="nombre"
+        />
+        <div *ngIf="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched" class="text-red-500 text-sm">
+          El nombre es obligatorio.
+        </div>
+      </div>
+
+      <!-- Campo: Apellidos -->
+      <div class="form-control mb-4">
+        <label class="label">
+          <span class="label-text text-gray-600">Apellidos*</span>
+        </label>
+        <input
+          type="text"
+          placeholder="López Gutiérrez"
+          class="input input-bordered w-full"
+          formControlName="apellidos"
+        />
+        <div *ngIf="registerForm.get('apellidos')?.invalid && registerForm.get('apellidos')?.touched" class="text-red-500 text-sm">
+          Los apellidos son obligatorios.
+        </div>
+      </div>
+
+      <!-- Campo: Correo Electrónico -->
+      <div class="form-control mb-4">
+        <label class="label">
+          <span class="label-text text-gray-600">Correo electrónico*</span>
+        </label>
+        <input
+          type="email"
+          placeholder="juanlopez@gmail.com"
+          class="input input-bordered w-full"
+          formControlName="email"
+        />
+        <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="text-red-500 text-sm">
+          Introduce un correo electrónico válido.
+        </div>
+      </div>
+
+      <!-- Campo: Contraseña -->
+      <div class="form-control mb-4">
+        <label class="label">
+          <span class="label-text text-gray-600">Contraseña*</span>
+        </label>
+        <input
+          type="password"
+          placeholder="****************"
+          class="input input-bordered w-full"
+          formControlName="password"
+        />
+        <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="text-red-500 text-sm">
+          La contraseña debe tener al menos 8 caracteres, incluir una letra mayúscula, un número y un símbolo especial.
+        </div>
+      </div>
+
+      <!-- Campo: Departamento -->
+      <div class="form-control mb-4">
+        <label class="label">
+          <span class="label-text text-gray-600">Selecciona Departamento al que pertenece*</span>
+        </label>
+        <select class="select select-bordered w-full" formControlName="departamento">
+          <option disabled selected>Selecciona un departamento</option>
+          <option value="ingenieria sistema">Ingeniería de sistemas</option>
+          <option value="electronica">Electrónica</option>
+          <option value="otro">Otro</option>
+        </select>
+        <div *ngIf="registerForm.get('departamento')?.invalid && registerForm.get('departamento')?.touched" class="text-red-500 text-sm">
+          Selecciona un departamento.
+        </div>
+      </div>
+
+      <div class="form-control mb-4">
+        <input type="hidden" formControlName="role" value="TUTOR" />
+      </div>
+
+      <!-- Campo: Plan de Suscripción
+      <div class="form-control mb-4">
+        <label class="label">
+          <span class="label-text text-gray-600">Selecciona un Plan de Suscripción*</span>
+        </label>
+        <select class="select select-bordered w-full" formControlName="planSeleccionado">
+          <option disabled selected>Selecciona un plan</option>
+          <option value="basic">Básico</option>
+          <option value="premium">Premium</option>
+          <option value="pro">Pro</option>
+        </select>
+        <div *ngIf="registerForm.get('planSeleccionado')?.invalid && registerForm.get('planSeleccionado')?.touched" class="text-red-500 text-sm">
+          Selecciona un plan de suscripción.
+        </div>
+      </div>-->
+
+      <!-- Botón: Registrarse -->
+      <button class="btn btn-success w-full mt-4" type="submit" [disabled]="registerForm.invalid">
+        <i class="fa fa-user-plus mr-2"></i> REGISTRARSE
+      </button>
+    </form>
+
+    <!-- Enlace: Iniciar Sesión -->
+    <p class="text-center text-sm mt-4">
+      ¿Ya tienes cuenta? <a routerLink="/auth/login" class="text-blue-600">Inicia sesión</a>
+    </p>
+  </div>
+
+  <!-- Botón: Volver -->
+  <button class="btn btn-success absolute top-4 left-4" (click)="router.navigate(['/'])">
+    <i class="fa fa-arrow-left"></i> VOLVER
+  </button>
+</div>
