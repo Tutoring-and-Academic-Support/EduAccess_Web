@@ -25,7 +25,8 @@ import { CommonModule } from '@angular/common';
     MatButtonModule, 
     MatSnackBarModule, 
     MatProgressSpinnerModule, 
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+  ],
 })
 
 export class LoginComponent implements OnInit {
@@ -35,7 +36,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router,
+    protected router: Router,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute
   ) {

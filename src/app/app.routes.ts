@@ -51,13 +51,7 @@ import { DashboardTutorComponent } from './page/dashboard-tutor/dashboard-tutor/
 import { AuthGuard } from './core/guard/auth.guard';
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: MainLayoutComponent,
-    children: [
-      { path: '', component: HomeComponent },
-    ]
-  },
+
   {
     path: 'dashboard',
     component: DashboardTutorComponent,
@@ -78,5 +72,13 @@ export const routes: Routes = [
       { path: 'register-tutor', component: RegisterTutorComponent }
     ]
   },
+  
+  { path: 'inicio', component: MainLayoutComponent,
+    children: [
+      { path: '', component: HomeComponent },
+    ]
+   },
+   
+  { path: '', redirectTo: '/inicio', pathMatch: 'full' },
   { path: '**', redirectTo: '/' }
 ];

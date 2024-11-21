@@ -22,8 +22,10 @@ export class AuthService {
 
   // verifica si el usuario está autenticado
   isAuthenticated(): boolean {
-    return !!this.storageService.getAuthData()?.token;
+    const authData = this.storageService.getAuthData();
+    return authData !== null && !!authData.token;
   }
+  
 
   // metodo de login
   login(email: string, password: string): Observable<AuthResponse> {

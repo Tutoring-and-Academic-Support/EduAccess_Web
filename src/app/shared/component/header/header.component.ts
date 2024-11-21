@@ -33,19 +33,21 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  updateAuthStatus() {
-    this.isAuthenticated = this.authService.isAuthenticated();
-    this.userRole = this.authService.getUserRole();
-    
-        // Lógica para mostrar la navegación adecuada
-        this.showHomeNav = !this.isAuthenticated;
-        this.showAuthNav = this.isAuthenticated;
-  }
+// src/app/shared/component/header/header.component.ts
 
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/auth/login']);
-  }
+updateAuthStatus() {
+  this.isAuthenticated = this.authService.isAuthenticated();
+  this.userRole = this.authService.getUserRole();
+  
+  // Lógica para mostrar la navegación adecuada
+  this.showHomeNav = !this.isAuthenticated;
+  this.showAuthNav = this.isAuthenticated;
+
+  console.log('isAuthenticated:', this.isAuthenticated);
+  console.log('showHomeNav:', this.showHomeNav);
+  console.log('showAuthNav:', this.showAuthNav);
+}
+
 
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
