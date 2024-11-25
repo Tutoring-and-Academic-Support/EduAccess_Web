@@ -25,18 +25,29 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptorsFromDi())]
   }*/
 
-    import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { jwtInterceptor } from './core/interceptor/jwt.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthErrorInterceptor } from './core/interceptor/auth-error.interceptor';
+import { withInterceptorsFromDi } from '@angular/common/http';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes), 
+    //provideHttpClient(withInterceptorsFromDi()),
     provideAnimationsAsync(),
-    provideHttpClient(withInterceptors([jwtInterceptor])),
+    importProvidersFrom(BrowserAnimationsModule),
+
+    provideHttpClient(withInterceptors([
+      jwtInterceptor,
+      AuthErrorInterceptor,
+      
+    ])),
   ]
 };

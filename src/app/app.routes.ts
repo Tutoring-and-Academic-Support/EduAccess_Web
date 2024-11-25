@@ -49,8 +49,16 @@ import { HomeComponent } from './page/home/home/home.component';
 import { DashboardTutorComponent } from './page/dashboard-tutor/dashboard-tutor/dashboard-tutor.component';
 //import { DashboardStudentComponent } from './page/dashboard-student/dashboard-student.component';
 import { AuthGuard } from './core/guard/auth.guard';
+import { PaymentSuccessComponent } from './page/dashboard-tutor/payment-success/payment-success.component';
+import { InviteStudentsComponent } from './page/dashboard-tutor/invite-students/invite-students.component';
 
 export const routes: Routes = [
+
+  { path: 'inicio', component: MainLayoutComponent,
+    children: [
+      { path: '', component: HomeComponent },
+    ]
+   },
 
   {
     path: 'dashboard',
@@ -73,12 +81,16 @@ export const routes: Routes = [
     ]
   },
   
-  { path: 'inicio', component: MainLayoutComponent,
-    children: [
-      { path: '', component: HomeComponent },
-    ]
-   },
+  { path: 'payment-success', component: PaymentSuccessComponent },
+  { 
+    path: 'invitar-estudiantes', 
+    component: InviteStudentsComponent, 
+    canActivate: [AuthGuard], 
+    data: { expectedRole: 'TUTOR' } 
+  },
    
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
   { path: '**', redirectTo: '/' }
+
+
 ];

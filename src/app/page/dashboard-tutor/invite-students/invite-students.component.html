@@ -1,0 +1,15 @@
+<div class="container">
+    <h2>Invitar a Estudiantes</h2>
+    <form [formGroup]="inviteForm" (ngSubmit)="onSubmit()">
+      <div formArrayName="emails">
+        <div *ngFor="let emailCtrl of emails.controls; let i = index">
+          <label>Correo del Estudiante {{ i + 1 }}</label>
+          <input type="email" [formControlName]="i" placeholder="ejemplo@correo.com" />
+          <button type="button" (click)="removeEmailField(i)">Eliminar</button>
+        </div>
+      </div>
+      <button type="button" (click)="addEmailField()">Agregar otro correo</button>
+      <button type="submit">Enviar Invitaciones</button>
+    </form>
+  </div>
+  

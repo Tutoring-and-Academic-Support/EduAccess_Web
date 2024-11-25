@@ -7,7 +7,7 @@
     </div>
 
     <!-- Navegación dinámica -->
-    <nav class="hidden md:flex items-center space-x-4">
+    <nav class="flex items-center space-x-4">
       <!-- Opciones públicas -->
       <ng-container *ngIf="showHomeNav">
         <a routerLink="/inicio" class="hover:text-yellow-400 transition-colors duration-300 text-sm md:text-base flex items-center space-x-2">
@@ -21,15 +21,15 @@
         </a>
       </ng-container>
 
-      <!-- Opciones privadas 
+      <!-- Opciones privadas -->
       <ng-container *ngIf="showAuthNav">
-        <a routerLink="/inicio" class="hover:text-yellow-400 transition-colors duration-300 text-sm md:text-base flex items-center space-x-2">
+        <!--<a routerLink="/inicio" class="hover:text-yellow-400 transition-colors duration-300 text-sm md:text-base flex items-center space-x-2">
           <i class="fas fa-arrow-left"></i> <span>Ir al Inicio</span>
-        </a>
+        </a>-->
         <button (click)="logout()" class="bg-red-500 hover:bg-red-600 text-sm md:text-base px-4 py-2 rounded-full transition duration-300 flex items-center space-x-2">
           <i class="fas fa-sign-out-alt"></i> <span>Cerrar Sesión</span>
         </button>
-      </ng-container>-->
+      </ng-container>
     </nav>
   </div>
 </header>

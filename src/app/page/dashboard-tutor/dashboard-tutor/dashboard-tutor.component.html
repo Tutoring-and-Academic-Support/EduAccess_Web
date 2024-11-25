@@ -58,34 +58,14 @@
 
   <!-- Planes -->
   <div class="grid grid-cols-3 gap-6">
-    <!-- Plan Básico -->
-    <div class="plan-card bg-[#4EA3D7] text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:scale-105">
-      <h2 class="font-bold text-2xl">Plan Básico</h2>
-      <p class="text-lg mt-2">S/. 200</p>
-      <p class="mt-4">Acceso limitado</p>
-      <button class="btn bg-white text-[#4EA3D7] mt-6 px-4 py-2 rounded-lg font-bold hover:bg-gray-100 transition">
-        Seleccionar Plan
-      </button>
-    </div>
-
-    <!-- Plan Premium -->
-    <div class="plan-card bg-[#007BFF] text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:scale-105">
-      <h2 class="font-bold text-2xl">Plan Premium</h2>
-      <p class="text-lg mt-2">S/. 500</p>
-      <p class="mt-4">Acceso avanzado</p>
-      <button class="btn bg-white text-[#007BFF] mt-6 px-4 py-2 rounded-lg font-bold hover:bg-gray-100 transition">
-        Seleccionar Plan
-      </button>
-    </div>
-
-    <!-- Plan Empresarial -->
-    <div class="plan-card bg-[#002A52] text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:scale-105">
-      <h2 class="font-bold text-2xl">Plan Empresarial</h2>
-      <p class="text-lg mt-2">S/. 5000</p>
-      <p class="mt-4">Para empresas</p>
-      <button class="btn bg-white text-[#002A52] mt-6 px-4 py-2 rounded-lg font-bold hover:bg-gray-100 transition">
-        Seleccionar Plan
-      </button>
+    <!-- Iterar sobre los planes obtenidos del backend -->
+    <div
+      class="plan-card"
+      *ngFor="let plan of plans"
+    >
+      <h2>{{ plan.nombre }}</h2>
+      <p>Precio: S/. {{ plan.precio }}</p>
+      <button (click)="selectPlan(plan)">Seleccionar Plan</button>
     </div>
   </div>
 </main>

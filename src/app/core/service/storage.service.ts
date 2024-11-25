@@ -74,10 +74,17 @@ export class StorageService {
   }
 
   // Obtiene los datos de autenticación desde el almacenamiento local
-  getAuthData(): AuthResponse | null {
+  /*getAuthData(): AuthResponse | null {
     const data = localStorage.getItem(this.authKey);
     return data ? JSON.parse(data) as AuthResponse : null;
-  }
+  }*/
+
+  getAuthData(): AuthResponse | null {
+  const data = localStorage.getItem(this.authKey);
+  console.log('StorageService - getAuthData:', data);
+  return data ? JSON.parse(data) as AuthResponse : null;
+}
+
 
   // Limpia los datos de autenticación del almacenamiento local
   clearAuthData(): void {

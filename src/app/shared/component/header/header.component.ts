@@ -1,4 +1,4 @@
-// shared/header/header.component.ts
+/*
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/service/auth.service';
@@ -52,5 +52,67 @@ updateAuthStatus() {
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
+}*/
+
+// src/app/shared/component/header/header.component.ts
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
+import { AuthService } from '../../../core/service/auth.service';
+import { filter } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Si usas MatSnackBar
+
+@Component({
+  selector: 'app-header',
+  imports: [CommonModule, RouterModule],
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
+  standalone: true,
+})
+export class HeaderComponent implements OnInit {
+  isAuthenticated: boolean = false;
+  userRole: string | null = null;
+  isMobileMenuOpen: boolean = false;
+  showHomeNav: boolean = false; // Opciones públicas
+  showAuthNav: boolean = false; // Opciones privadas
+
+  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {}
+
+  ngOnInit() {
+    this.updateAuthStatus();
+
+    // Suscribirse a cambios en la navegación para actualizar el estado de autenticación
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.updateAuthStatus();
+    });
+  }
+
+  updateAuthStatus() {
+    this.isAuthenticated = this.authService.isAuthenticated();
+    this.userRole = this.authService.getUserRole();
+
+    // Lógica para mostrar la navegación adecuada
+    this.showHomeNav = !this.isAuthenticated;
+    this.showAuthNav = this.isAuthenticated;
+
+    console.log('isAuthenticated:', this.isAuthenticated);
+    console.log('showHomeNav:', this.showHomeNav);
+    console.log('showAuthNav:', this.showAuthNav);
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/auth/login']);
+    this.snackBar.open('Has cerrado sesión correctamente.', 'Cerrar', {
+      duration: 3000
+    });
+  }
 }
+
 
