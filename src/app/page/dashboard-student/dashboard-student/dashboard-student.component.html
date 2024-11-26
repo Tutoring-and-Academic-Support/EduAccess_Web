@@ -1,0 +1,26 @@
+<!-- src/app/page/dashboard-student/dashboard-student.component.html -->
+
+<div class="min-h-screen bg-white flex">
+    <!-- Barra lateral -->
+    <aside class="w-64 bg-blue-600 text-white p-4">
+      <h2 class="text-2xl font-bold mb-4">Dashboard Estudiante</h2>
+      <ul>
+        <li class="mb-2">
+          <a routerLink="/student-dashboard" class="hover:bg-blue-700 p-2 rounded">Inicio</a>
+        </li>
+        <li class="mb-2">
+          <a routerLink="/profile" class="hover:bg-blue-700 p-2 rounded">Perfil</a>
+        </li>
+        <li class="mb-2">
+          <a (click)="logout()" class="cursor-pointer hover:bg-blue-700 p-2 rounded">Cerrar Sesión</a>
+        </li>
+      </ul>
+    </aside>
+  
+    <!-- Contenido principal -->
+    <main class="flex-1 p-8">
+      <h1 class="text-3xl font-bold mb-6">Bienvenido al Dashboard</h1>
+      <!-- Contenido específico del estudiante -->
+    </main>
+  </div>
+  

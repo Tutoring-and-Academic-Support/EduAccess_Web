@@ -1,0 +1,140 @@
+/* General Dashboard */
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    overflow: hidden; /* Para evitar contenido que sobresalga */
+    background-color: #ffffff; /* Fondo blanco */
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #d8e8ff; /* Azul pastel para el fondo */
+    color: #003366; /* Azul oscuro para el texto */
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease-in-out;
+    width: 80px; /* Ancho colapsado */
+    overflow: hidden; /* Esconde el contenido que sobresale */
+    white-space: nowrap; /* Evita que el texto se desborde */
+}
+
+.sidebar.collapsed {
+    width: 80px;
+}
+
+.sidebar:not(.collapsed) {
+    width: 250px;
+}
+
+/* Botón de colapso */
+.collapse-btn {
+    background-color: #4a90e2; /* Azul moderno */
+    color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para resaltar */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Sección del perfil */
+.profile-section {
+    text-align: center;
+}
+
+.profile-section p {
+    color: #003366; /* Azul oscuro para texto del perfil */
+    font-weight: bold;
+}
+
+/* Botón "Ver Perfil" */
+.profile-section .btn {
+    background-color: #4a90e2; /* Azul vibrante */
+    border: 1px solid #003366; /* Bordes más definidos */
+    color: white;
+}
+
+/* Menú de navegación */
+.menu-link {
+    display: flex;
+    align-items: center;
+    color: #4a90e2; /* Azul claro */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.menu-link i {
+    font-size: 18px;
+    color: #4a90e2; /* Azul moderno */
+}
+
+.menu-link:hover {
+    background-color: #003366; /* Azul oscuro para hover */
+    color: white;
+}
+
+.menu-link:hover i {
+    color: white;
+}
+
+/* Menú Activo */
+.menu li a.active {
+    background-color: #003366;
+    color: white;
+}
+
+/* Botón "Cerrar Sesión" */
+.logout-btn {
+    background-color: #e63946; /* Rojo vibrante */
+    color: white;
+    font-weight: bold;
+    border: 1px solid #b22234; /* Bordes oscuros */
+}
+
+.logout-btn:hover {
+    background-color: #c53030; /* Rojo más oscuro al hacer hover */
+    color: white;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Plan Cards */
+.plan-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px;
+    text-align: center;
+}
+
+.plan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.plan-card h2 {
+    font-size: 1.5rem;
+    color: #003366;
+}
+
+.plan-card p {
+    margin: 10px 0;
+    color: #555555;
+}
+
+.plan-card button {
+    background-color: #0066cc;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.plan-card button:hover {
+    background-color: #004080;
+}

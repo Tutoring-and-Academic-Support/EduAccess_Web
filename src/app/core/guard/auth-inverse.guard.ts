@@ -23,8 +23,6 @@ export const authInverseGuard: CanActivateFn = (route, state) => {
 
   return true;
 };*/
-
-// src/app/core/guard/auth-inverse.guard.ts
 // src/app/core/guard/auth-inverse.guard.ts
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
@@ -48,7 +46,3 @@ export class AuthInverseGuard implements CanActivate {
     }
   }
 }
-
-
-
-

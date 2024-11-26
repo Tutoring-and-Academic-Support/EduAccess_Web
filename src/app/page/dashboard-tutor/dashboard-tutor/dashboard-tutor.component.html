@@ -1,64 +1,116 @@
-<!-- src/app/page/dashboard-tutor/dashboard-tutor.component.html -->
-<section class="subscription-plans py-16 bg-white">
-    <div class="container mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gray-800">Bienvenido al Dashboard del Tutor</h2>
-      <h3 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-700">Elige tu Plan de Suscripción</h3>
-      <div class="flex flex-wrap justify-center gap-8">
-        <!-- Plan Básico -->
-        <div class="plan-card flex flex-col max-w-xs bg-green-600 text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:scale-105">
-          <h3 class="text-2xl font-semibold mb-4">PLAN BÁSICO</h3>
-          <p class="text-4xl font-bold">S/.200</p>
-          <p class="text-sm mb-6">Acceso limitado</p>
-          <hr class="border-green-500 mb-6">
-          <ul class="flex-grow space-y-3 text-left">
-            <li class="flex items-center">
-              <span class="material-icons text-white mr-2">check_circle</span> Acceso a contenido básico.
-            </li>
-            <li class="flex items-center">
-              <span class="material-icons text-white mr-2">check_circle</span> Soporte comunitario.
-            </li>
-            <!-- Más características -->
-          </ul>
-          <button class="btn bg-green-700 hover:bg-green-800 w-full mt-auto py-3 text-white rounded-lg">Seleccionar Plan</button>
-        </div>
-        
-        <!-- Plan Premium -->
-        <div class="plan-card flex flex-col max-w-xs bg-blue-600 text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:scale-105">
-          <h3 class="text-2xl font-semibold mb-4">PLAN PREMIUM</h3>
-          <p class="text-4xl font-bold">S/.500</p>
-          <p class="text-sm mb-6">Acceso avanzado y personalizado</p>
-          <hr class="border-blue-500 mb-6">
-          <ul class="flex-grow space-y-3 text-left">
-            <li class="flex items-center">
-              <span class="material-icons text-white mr-2">check_circle</span> Recursos avanzados para cursos difíciles.
-            </li>
-            <li class="flex items-center">
-              <span class="material-icons text-white mr-2">check_circle</span> Ejercicios resueltos personalizados.
-            </li>
-            <!-- Más características -->
-          </ul>
-          <button class="btn bg-blue-700 hover:bg-blue-800 w-full mt-auto py-3 text-white rounded-lg">Seleccionar Plan</button>
-        </div>
-        
-        <!-- Plan Empresarial -->
-        <div class="plan-card flex flex-col max-w-xs bg-blue-700 text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:scale-105">
-          <h3 class="text-2xl font-semibold mb-4">PLAN EMPRESARIAL</h3>
-          <p class="text-4xl font-bold">S/.5,000</p>
-          <p class="text-sm mb-6">500 estudiantes</p>
-          <hr class="border-blue-500 mb-6">
-          <ul class="flex-grow space-y-3 text-left">
-            <li class="flex items-center">
-              <span class="material-icons text-white mr-2">check_circle</span> Recursos avanzados y personalizados.
-            </li>
-            <li class="flex items-center">
-              <span class="material-icons text-white mr-2">check_circle</span> Supervisión académica para toda la empresa.
-            </li>
-            <!-- Más características -->
-          </ul>
-          <button class="btn bg-blue-800 hover:bg-blue-900 w-full mt-auto py-3 text-white rounded-lg">Seleccionar Plan</button>
+<div class="dashboard bg-white min-h-screen flex">
+  <!-- Barra lateral -->
+  <aside
+    [class.collapsed]="isCollapsed"
+    class="sidebar bg-blue-600 text-white transition-width duration-300 flex flex-col"
+    [style.width.px]="isCollapsed ? 80 : 250"
+  >
+    <!-- Botón de colapso -->
+    <button
+      (click)="toggleSidebar()"
+      class="collapse-btn bg-blue-500 text-white p-2 rounded-full shadow-md m-4 focus:outline-none"
+      title="Toggle Sidebar"
+    >
+      <i [class]="isCollapsed ? 'fas fa-chevron-right' : 'fas fa-chevron-left'"></i>
+    </button>
+
+    <!-- Sección de perfil -->
+    <div class="profile-section p-4 flex flex-col items-center">
+      <div class="profile-icon mb-4">
+        <i class="fas fa-user text-4xl"></i>
+      </div>
+      <p
+        class="font-bold text-center text-lg mb-6 transition-opacity duration-300"
+        [class.opacity-0]="isCollapsed"
+        [class.opacity-100]="!isCollapsed"
+      >
+        PROFILE
+      </p>
+      <button
+        class="btn w-full bg-blue-500 hover:bg-blue-700 py-2 rounded-lg shadow-md transition-opacity duration-300"
+        [class.opacity-0]="isCollapsed"
+        [class.opacity-100]="!isCollapsed"
+      >
+        Ver Perfil
+      </button>
+    </div>
+
+    <!-- Menú de navegación -->
+    <ul class="menu flex-1 space-y-4 px-4 py-2">
+      <li class="menu-item">
+        <a
+          [routerLink]="section.link"
+          [class.active]="activeSection === section.name"
+          class="menu-link flex items-center space-x-3 py-2 px-4 rounded-lg hover:bg-blue-700 transition"
+          *ngFor="let section of sections"
+          (click)="setActive(section.name)"
+        >
+          <i [class]="section.icon"></i>
+          <span
+            class="transition-opacity duration-300"
+            [class.opacity-0]="isCollapsed"
+            [class.opacity-100]="!isCollapsed"
+          >
+            {{ section.label }}
+          </span>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Sección de cierre de sesión -->
+    <div class="logout-section px-4 py-2">
+      <button
+        class="logout-btn btn w-full bg-red-500 hover:bg-red-700 py-2 rounded-lg shadow-md flex items-center justify-center transition-opacity duration-300"
+        [class.opacity-0]="isCollapsed"
+        [class.opacity-100]="!isCollapsed"
+        (click)="logout()"
+      >
+        <i class="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión
+      </button>
+    </div>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="main-content flex-1 py-8 px-12 transition-all duration-300">
+    <h1 class="text-4xl font-bold text-gray-800 mb-6">Tablero</h1>
+    <hr class="border-gray-300 mb-6" />
+
+    <!-- Barra de búsqueda -->
+    <div class="flex items-center justify-between mb-8">
+      <div class="flex items-center bg-white shadow-md rounded-lg p-2 w-3/4">
+        <i class="fas fa-search text-gray-500 mr-2"></i>
+        <input
+          type="text"
+          placeholder="Buscar tu plan"
+          class="w-full outline-none text-gray-700"
+        />
+      </div>
+      <button class="btn bg-white shadow-md text-gray-700 px-4 py-2 rounded-lg flex items-center hover:bg-gray-100 transition">
+        FILTRAR <i class="fas fa-chevron-down ml-2"></i>
+      </button>
+    </div>
+
+    <!-- Planes -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Iterar sobre los planes obtenidos del backend -->
+      <div
+        class="plan-card bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
+        *ngFor="let plan of plans"
+      >
+        <h2 class="text-2xl font-bold text-blue-600 mb-2 text-center">{{ plan.nombre }}</h2>
+        <p class="text-gray-600 text-lg text-center mb-4">
+          Cantidad de estudiantes: {{ plan.cantidadEstudiantes }}
+        </p>
+        <p class="text-gray-600 text-lg text-center mb-4">Precio: S/. {{ plan.precio }}</p>
+        <div class="flex items-center justify-center mt-4">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-200"
+            (click)="selectPlan(plan)"
+          >
+            Seleccionar Plan
+          </button>
         </div>
       </div>
-      <button class="btn btn-danger mt-8" (click)="logout()">Cerrar Sesión</button>
     </div>
-  </section>
-  
+  </main>
+</div>
