@@ -4,76 +4,6 @@
 @tailwind utilities;
 
 
-/* Variables personalizadas 
-$primary-color: #1e3a8a;
-$secondary-color: #10b981;
-$text-color: #ffffff;
-$background-color: #f3f4f6;
-
-
-/* Estilos para el header 
-header {
-  .nav-link {
-    @apply text-white hover:text-gray-300;
-  }
-  .btn-green {
-    @apply bg-green-500 px-4 py-2 rounded text-white hover:bg-green-600;
-  }
-  .btn-blue {
-    @apply bg-blue-500 px-4 py-2 rounded text-white hover:bg-blue-600;
-  }
-}
-
-/* Carrusel 
-.carousel {
-  @apply relative h-96 overflow-hidden;
-  .carousel-images {
-    @apply flex transition-transform duration-700 ease-in-out;
-  }
-  .carousel-control {
-    @apply absolute top-1/2 transform -translate-y-1/2 text-white bg-black bg-opacity-50 rounded-full p-2;
-  }
-}
-
-/* Estilos para la sección principal 
-.hero {
-  @apply bg-gray-700 text-white text-center py-12;
-}
-
-/* Estilos para la sección de planes 
-.plans {
-  @apply py-16 bg-gray-100;
-  .plan-card {
-    @apply bg-blue-600 text-white p-6 rounded-lg shadow-lg;
-  }
-}
-
-/* Estilos para misión y visión 
-.mission-vision {
-  @apply py-16 bg-white;
-}
-
-/* Estilos general 
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: $background-color;
-  color: $text-color;
-}
-
-.btn-green, .btn-blue {
-  @apply rounded text-white px-4 py-2 transition-all duration-300 ease-in-out;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); // Sombra suave
-}
-
-.btn-green:hover {
-  @apply bg-green-600 transform scale-105; // Hover: cambiar color y aumentar tamaño
-}
-
-.btn-blue:hover {
-  @apply bg-blue-600 transform scale-105; // Hover: cambiar color y aumentar tamaño
-}*/
-
-
 /*Seccion de caracteristicas*/
 /*Seccion de testimonios*/
 /*Seccion de equipo*/
@@ -81,6 +11,3 @@ body {
 /*Seccion de footer*/
 /*Boton volver al principio*/
 /*Media Queries*/
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

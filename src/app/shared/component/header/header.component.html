@@ -7,29 +7,73 @@
     </div>
 
     <!-- Navegación dinámica -->
-    <nav class="flex items-center space-x-4">
-      <!-- Opciones públicas -->
+    <nav class="hidden md:flex items-center space-x-4">
       <ng-container *ngIf="showHomeNav">
-        <a routerLink="/inicio" class="hover:text-yellow-400 transition-colors duration-300 text-sm md:text-base flex items-center space-x-2">
-          <i class="fas fa-home"></i> <span>Inicio</span>
+        <a routerLink="/home" class="hover:text-yellow-400 transition-colors duration-300 text-sm md:text-base flex items-center space-x-2">
+          <i class="fas fa-home"></i> <!-- Icono de inicio -->
+          <span>Inicio</span>
+        </a>
+        <a routerLink="/about" class="hover:text-yellow-400 transition-colors duration-300 text-sm md:text-base flex items-center space-x-2">
+          <i class="fas fa-info-circle"></i> <!-- Icono de información -->
+          <span>Sobre Nosotros</span>
         </a>
         <a routerLink="/auth/register-tutor" class="bg-green-500 hover:bg-green-600 text-sm md:text-base px-4 py-2 rounded-full transition duration-300 flex items-center space-x-2">
-          <i class="fas fa-user-plus"></i> <span>Registrarse</span>
+          <i class="fas fa-user-plus"></i> <!-- Icono de registrarse -->
+          <span>Registrarse</span>
         </a>
         <a routerLink="/auth/login" class="bg-blue-500 hover:bg-blue-600 text-sm md:text-base px-4 py-2 rounded-full transition duration-300 flex items-center space-x-2">
-          <i class="fas fa-sign-in-alt"></i> <span>Iniciar sesión</span>
+          <i class="fas fa-sign-in-alt"></i> <!-- Icono de iniciar sesión -->
+          <span>Iniciar sesión</span>
         </a>
       </ng-container>
 
-      <!-- Opciones privadas -->
       <ng-container *ngIf="showAuthNav">
-        <!--<a routerLink="/inicio" class="hover:text-yellow-400 transition-colors duration-300 text-sm md:text-base flex items-center space-x-2">
-          <i class="fas fa-arrow-left"></i> <span>Ir al Inicio</span>
-        </a>-->
-        <button (click)="logout()" class="bg-red-500 hover:bg-red-600 text-sm md:text-base px-4 py-2 rounded-full transition duration-300 flex items-center space-x-2">
-          <i class="fas fa-sign-out-alt"></i> <span>Cerrar Sesión</span>
-        </button>
+        <a routerLink="/home" class="hover:text-yellow-400 transition-colors duration-300 text-sm md:text-base flex items-center space-x-2">
+          <i class="fas fa-arrow-left"></i> <!-- Icono de regresar -->
+          <span>Ir al Inicio</span>
+        </a>
+        <!--<button (click)="logout()" class="bg-red-500 hover:bg-red-600 text-sm md:text-base px-4 py-2 rounded-full transition duration-300 flex items-center space-x-2">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Cerrar Sesión</span>
+        </button>-->
       </ng-container>
     </nav>
+
+    <!-- Botón de menú móvil -->
+    <button class="md:hidden text-white focus:outline-none" (click)="toggleMobileMenu()">
+      <i class="fas fa-bars"></i> <!-- Icono de menú -->
+    </button>
+  </div>
+
+  <!-- Menú móvil -->
+  <div *ngIf="isMobileMenuOpen" class="bg-gray-800 text-white p-4 md:hidden">
+    <ng-container *ngIf="showHomeNav">
+      <a routerLink="/home" class="block hover:text-yellow-400 transition-colors duration-300 py-2 flex items-center space-x-2">
+        <i class="fas fa-home"></i> <!-- Icono de inicio -->
+        <span>Inicio</span>
+      </a>
+      <a routerLink="/about" class="block hover:text-yellow-400 transition-colors duration-300 py-2 flex items-center space-x-2">
+        <i class="fas fa-info-circle"></i> <!-- Icono de información -->
+        <span>Sobre Nosotros</span>
+      </a>
+      <a routerLink="/auth/register-tutor" class="block bg-green-500 hover:bg-green-600 py-2 px-4 rounded-full transition duration-300 flex items-center space-x-2">
+        <i class="fas fa-user-plus"></i> <!-- Icono de registrarse -->
+        <span>Registrarse</span>
+      </a>
+      <a routerLink="/auth/login" class="block bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded-full transition duration-300 flex items-center space-x-2">
+        <i class="fas fa-sign-in-alt"></i> <!-- Icono de iniciar sesión -->
+        <span>Iniciar sesión</span>
+      </a>
+    </ng-container>
+    <ng-container *ngIf="showAuthNav">
+      <a routerLink="/home" class="block hover:text-yellow-400 transition-colors duration-300 py-2 flex items-center space-x-2">
+        <i class="fas fa-arrow-left"></i> <!-- Icono de regresar -->
+        <span>Ir al Inicio</span>
+      </a>
+      <!--<button (click)="logout()" class="block bg-red-500 hover:bg-red-600 py-2 px-4 rounded-full transition duration-300 flex items-center space-x-2">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Cerrar Sesión</span>
+      </button>-->
+    </ng-container>
   </div>
 </header>

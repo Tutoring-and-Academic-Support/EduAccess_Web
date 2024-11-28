@@ -24,6 +24,7 @@ import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterTutorComponent } from './register-tutor/register-tutor.component'; // Asegúrate de que esté bien importado
 import { CarouselComponent } from '../../shared/component/carousel/carousel.component'; // Importa tu carrusel
+
 export const authRoutes: Routes = [
   {
       path:'',
