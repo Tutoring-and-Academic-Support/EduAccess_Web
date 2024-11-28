@@ -1,0 +1,29 @@
+/* Efecto de fondo dinámico 
+.bg-gradient-to-r {
+    animation: gradientBackground 6s infinite alternate;
+  }
+  
+  @keyframes gradientBackground {
+    0% {
+      background: linear-gradient(to right, #3b82f6, #60a5fa, #1d4ed8);
+    }
+    50% {
+      background: linear-gradient(to right, #2563eb, #1e40af, #0f172a);
+    }
+    100% {
+      background: linear-gradient(to right, #3b82f6, #2563eb, #1d4ed8);
+    }
+  }*/
+  
+/* src/app/login/login.component.css */
+
+/* Clase para el spinner blanco */
+.white-spinner .mat-progress-spinner-circle {
+    stroke: white;
+  }
+  
+  /* Opcional: Ajustar el tamaño y margen del spinner */
+  .white-spinner {
+    width: 24px;
+    height: 24px;
+  }

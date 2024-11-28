@@ -1,1 +1,97 @@
-<p>login works!</p>
+<!-- src/app/login/login.component.html -->
+
+<div class="h-screen flex items-center justify-center bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600">
+    <div class="flex max-w-4xl w-full bg-white shadow-2xl rounded-lg overflow-hidden relative">
+      
+      <!-- Botón de Volver -->
+      <button class="btn btn-success absolute top-4 left-4 flex items-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg shadow transition duration-200"
+              (click)="router.navigate(['/inicio'])">
+        <i class="fa fa-arrow-left"></i>
+        <span></span>
+      </button>
+      
+      <div class="hidden md:flex flex-col justify-center items-center w-1/2 bg-gradient-to-b from-blue-700 to-blue-500 text-white p-10">
+        <ng-lottie
+        [options]="options"
+        style="width: 300px; height: 300px"
+        class="mb-4"
+      ></ng-lottie>
+
+        <h2 class="text-4xl font-bold mb-4">Bienvenido</h2>
+        <p class="text-lg leading-relaxed text-center">
+          Si no tienes una cuenta, únete a nuestra comunidad y crea tu cuenta aquí.
+        </p>
+        <button
+          (click)="router.navigate(['/register-tutor'])"
+          class="mt-6 bg-white text-blue-600 font-bold py-2 px-4 rounded-lg shadow hover:bg-gray-200 transition"
+        >
+          Registrarse
+        </button>
+      </div>
+      
+  
+      <!-- Sección derecha -->
+      <div class="w-full md:w-1/2 p-8">
+        <h2 class="text-3xl font-bold text-center mb-6">Iniciar Sesión</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
+          
+          <!-- Campo de Correo Electrónico -->
+          <div class="relative">
+            <i class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 fa fa-envelope"></i>
+            <input
+              type="email"
+              placeholder="Correo Electrónico"
+              class="input input-bordered w-full border-gray-300 rounded-lg p-3 pl-10 focus:border-blue-600 focus:ring-blue-600"
+              formControlName="email"
+            />
+            <!-- Mensajes de Error para Email -->
+            <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="mt-1 text-red-500 text-sm">
+              <div *ngIf="loginForm.get('email')?.errors?.['required']">
+                El correo es requerido.
+              </div>
+              <div *ngIf="loginForm.get('email')?.errors?.['email']">
+                Ingrese un correo válido.
+              </div>
+            </div>
+          </div>
+          
+          <!-- Campo de Contraseña -->
+          <div class="relative">
+            <i class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 fa fa-lock"></i>
+            <input
+              type="password"
+              placeholder="Contraseña"
+              class="input input-bordered w-full border-gray-300 rounded-lg p-3 pl-10 focus:border-blue-600 focus:ring-blue-600"
+              formControlName="password"
+            />
+            <!-- Mensajes de Error para Contraseña -->
+            <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="mt-1 text-red-500 text-sm">
+              <div *ngIf="loginForm.get('password')?.errors?.['required']">
+                La contraseña es requerida.
+              </div>
+            </div>
+          </div>
+          
+          <!-- Botón de Inicio de Sesión -->
+          <button
+            type="submit"
+            class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition duration-200"
+            [disabled]="isSubmitting || loginForm.invalid"
+          >
+            <span *ngIf="!isSubmitting">Iniciar Sesión</span>
+            <span *ngIf="isSubmitting">
+              <mat-spinner diameter="24"></mat-spinner>
+            </span>
+          </button>
+        </form>
+        
+        <!-- Enlace para registrarse -->
+        <p class="text-center text-gray-600 mt-4">
+          ¿No tienes cuenta? 
+          <span (click)="router.navigate(['/register-tutor'])" class="text-blue-600 font-bold cursor-pointer">
+            Regístrate aquí
+          </span>
+        </p>
+      
+    </div>
+  </div>

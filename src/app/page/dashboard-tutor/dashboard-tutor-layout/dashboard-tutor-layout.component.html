@@ -1,0 +1,81 @@
+<!-- src/app/page/dashboard-tutor/dashboard-tutor-layout/dashboard-tutor-layout.component.html -->
+
+<div class="dashboard bg-white min-h-screen flex">
+    <!-- Barra lateral -->
+    <aside
+      [class.collapsed]="isCollapsed"
+      class="sidebar bg-blue-600 text-white transition-width duration-300 flex flex-col"
+      [style.width.px]="isCollapsed ? 80 : 250"
+    >
+      <!-- Botón de colapso -->
+      <button
+        (click)="toggleSidebar()"
+        class="collapse-btn bg-blue-500 text-white p-2 rounded-full shadow-md m-4 focus:outline-none"
+        title="Toggle Sidebar"
+      >
+        <i [class]="isCollapsed ? 'fas fa-chevron-right' : 'fas fa-chevron-left'"></i>
+      </button>
+  
+      <!-- Sección de perfil -->
+      <div class="profile-section p-4 flex flex-col items-center">
+        <div class="profile-icon mb-4">
+          <i class="fas fa-user text-4xl"></i>
+        </div>
+        <p
+          class="font-bold text-center text-lg mb-6 transition-opacity duration-300"
+          [class.opacity-0]="isCollapsed"
+          [class.opacity-100]="!isCollapsed"
+        >
+          PROFILE
+        </p>
+       <button
+          class="btn w-full bg-blue-500 hover:bg-blue-700 py-2 rounded-lg shadow-md transition-opacity duration-300"
+          [class.opacity-0]="isCollapsed"
+          [class.opacity-100]="!isCollapsed"
+          routerLink="/dashboard-tutor/perfil"
+          *ngIf="authService.isPaymentComplete()"
+        >
+          Ver Perfil
+        </button>
+      </div>
+  
+      <!-- Menú de navegación -->
+      <ul class="menu flex-1 space-y-4 px-4 py-2">
+        <li class="menu-item" *ngFor="let section of sections">
+          <a
+            [routerLink]="section.link"
+            [class.active]="activeSection === section.name"
+            class="menu-link flex items-center space-x-3 py-2 px-4 rounded-lg hover:bg-blue-700 transition"
+            (click)="setActive(section.name)"
+          >
+            <i [class]="section.icon"></i>
+            <span
+              class="transition-opacity duration-300"
+              [class.opacity-0]="isCollapsed"
+              [class.opacity-100]="!isCollapsed"
+            >
+              {{ section.label }}
+            </span>
+          </a>
+        </li>
+      </ul>
+  
+      <!-- Sección de cierre de sesión -->
+      <div class="logout-section px-4 py-2">
+        <button
+          class="logout-btn btn w-full bg-red-500 hover:bg-red-700 py-2 rounded-lg shadow-md flex items-center justify-center transition-opacity duration-300"
+          [class.opacity-0]="isCollapsed"
+          [class.opacity-100]="!isCollapsed"
+          (click)="logout()"
+        >
+          <i class="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión
+        </button>
+      </div>
+    </aside>
+  
+    <!-- Contenido principal -->
+    <main class="main-content flex-1 py-8 px-12 transition-all duration-300">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+  
