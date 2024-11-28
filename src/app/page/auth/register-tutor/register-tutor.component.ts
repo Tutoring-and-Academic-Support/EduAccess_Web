@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../core/service/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { RegisterTutorRequest } from '../../../shared/model/register-request.model';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-register-tutor',
   templateUrl: './register-tutor.component.html',
   styleUrls: ['./register-tutor.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, MatSnackBarModule],
 })
 export class RegisterTutorComponent {
   registerForm: FormGroup;
@@ -32,11 +33,11 @@ export class RegisterTutorComponent {
           Validators.required,
           Validators.pattern(
             '^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$'
-          )
-        ]
+          ),
+        ],
       ],
       departamento: ['', Validators.required],
-      role: ['TUTOR']
+      role: ['TUTOR'],
     });
   }
 
@@ -44,25 +45,45 @@ export class RegisterTutorComponent {
     if (this.registerForm.valid) {
       this.isSubmitting = true;
       const tutorData: RegisterTutorRequest = this.registerForm.value;
+      console.log('Datos enviados al backend:', tutorData);
 
       this.authService.registerTutor(tutorData).subscribe({
         next: (response) => {
           this.isSubmitting = false;
-          this.snackBar.open('Registro exitoso. Redirigiendo al inicio de sesión.', 'Cerrar', {
-            duration: 3000
-          });
-          this.router.navigate(['/auth/login']); // Redirige al login
+          // Mostrar mensaje de registro exitoso y redirigir al login
+          this.snackBar
+            .open('Registro exitoso. Por favor, inicia sesión.', 'Cerrar', {
+              duration: 5000,
+            })
+            .afterDismissed()
+            .subscribe(() => {
+              this.router.navigate(['/auth/login'], {
+                queryParams: { registered: 'true' },
+              });
+            });
         },
         error: (error) => {
+          console.log('Error al registrar:', error);
           this.isSubmitting = false;
-          this.snackBar.open('Error al registrar: ' + (error.error || 'Inténtalo de nuevo.'), 'Cerrar', {
-            duration: 5000
+          let errorMessage = 'Inténtalo de nuevo.';
+          if (error.status === 400) {
+            if (error.error && typeof error.error === 'object') {
+              // Si el error es un objeto con detalles de validación
+              errorMessage = Object.values(error.error).join(' ');
+            } else {
+              errorMessage = error.error || 'Solicitud inválida.';
+            }
+          } else if (error.status === 500) {
+            errorMessage = 'Error interno del servidor.';
+          }
+          this.snackBar.open('Error al registrar: ' + errorMessage, 'Cerrar', {
+            duration: 5000,
           });
-        }
+        },
       });
     } else {
       this.snackBar.open('Por favor, completa todos los campos correctamente.', 'Cerrar', {
-        duration: 3000
+        duration: 3000,
       });
     }
   }

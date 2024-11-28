@@ -1,0 +1,35 @@
+/* src/app/page/register-student/register-student.component.scss */
+
+.register-student-container {
+    @apply flex items-center justify-center;
+  }
+  
+  .register-student-container .bg-white {
+    @apply p-8 rounded-lg shadow-md w-full max-w-md;
+  }
+  
+  .register-student-container h2 {
+    @apply text-2xl font-bold mb-6 text-center;
+  }
+  
+  .register-student-container form div {
+    @apply mb-4;
+  }
+  
+  .register-student-container form label {
+    @apply block text-gray-700;
+  }
+  
+  .register-student-container form input,
+  .register-student-container form select {
+    @apply w-full px-3 py-2 border rounded;
+  }
+  
+  .register-student-container form button {
+    @apply w-full bg-green-500 text-white py-2 rounded;
+  }
+  
+  .register-student-container form button:disabled {
+    @apply bg-green-300 cursor-not-allowed;
+  }
+  

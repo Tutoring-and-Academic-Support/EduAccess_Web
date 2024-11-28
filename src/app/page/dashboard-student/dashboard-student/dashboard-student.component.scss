@@ -1,0 +1,83 @@
+/* General Dashboard */
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  background-color: #ffffff; /* Fondo blanco */
+}
+
+/* Sidebar fija */
+.sidebar {
+  background-color: #d8e8ff; /* Azul pastel para el fondo */
+  color: #8db8e4; /* Azul oscuro para el texto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh; /* Altura completa de la pantalla */
+  width: 80px; /* Ancho colapsado */
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease-in-out;
+  overflow: hidden; /* Esconde el contenido que sobresale */
+  white-space: nowrap;
+}
+
+.sidebar:not(.collapsed) {
+  width: 250px;
+}
+
+/* Botón de colapso */
+.collapse-btn {
+  background-color: #4a90e2; /* Azul moderno */
+  color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+/* Barra lateral - Botón de Cerrar Sesión */
+.logout-btn {
+  background-color: #e63946; /* Rojo vibrante */
+  color: white;
+  font-weight: bold;
+  border: 1px solid #b22234;
+}
+
+.logout-btn:hover {
+  background-color: #c53030; /* Rojo más oscuro al hacer hover */
+}
+
+/* Contenido principal desplazable */
+.main-content {
+  margin-left: 80px; /* Espacio para la barra lateral colapsada */
+  padding: 2rem;
+  transition: margin-left 0.3s ease-in-out;
+  height: 100vh; /* Altura completa de la pantalla */
+}
+
+.sidebar:not(.collapsed) ~ .main-content {
+  margin-left: 250px; /* Ajusta el margen para la barra expandida */
+}
+
+/* Estilo del Select */
+.form-select {
+  background-color: #f5f5f5; /* Fondo claro */
+  color: #003366; /* Texto azul oscuro */
+  border: 1px solid #003366; /* Borde azul */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 8px 12px;
+  font-size: 1rem;
+
+  &:hover {
+    background-color: #e6f7ff; /* Fondo al pasar el mouse */
+    border-color: #4a90e2; /* Borde azul más claro */
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 4px #4a90e2; /* Sombra azul al enfocar */
+  }
+}
+
+/* Opciones del select */
+.form-select option {
+  background-color: #ffffff; /* Fondo de las opciones */
+  color: #003366; /* Texto de las opciones */
+}
