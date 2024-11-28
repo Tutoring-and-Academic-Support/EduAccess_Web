@@ -20,20 +20,24 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './profile-tutor.component.scss'
 })
 export class ProfileTutorComponent implements OnInit {
-  profile: UserProfileModel | null = null; // Usa el modelo importado
+
   isLoading: boolean = true;
   error: string = '';
+  isEditing: boolean = false; 
 
   isCollapsed: boolean = false;
   activeSection: string = 'dashboard';
+  originalProfile: UserProfileModel | null = null; // Para guardar una copia del perfil original
 
-  // In TutorLayoutComponent or wherever your sidebar logic is
-sections = [
-  { name: 'cursos', label: 'Cursos', link: '/dashboard-tutor/cursos', icon: 'fas fa-book' },
-  { name: 'invitar-estudiantes', label: 'Invitar', link: '/dashboard-tutor/invitar-estudiantes', icon: 'fas fa-user-plus' },
-  { name: 'perfil', label: 'Perfil', link: '/dashboard-tutor/perfil', icon: 'fas fa-user' },
-];
-
+  profile: UserProfileModel = {
+    id: 0,
+    email: '',
+    nombre: '',
+    apellidos: '',
+    departamento: '',
+    ciclo: 0,
+    role: '',
+  }; // Asigna un objeto vacío inicial para evitar errores.
 
   constructor(
     private profileService: ProfileService,
@@ -51,7 +55,8 @@ sections = [
   fetchProfile(): void {
     this.profileService.getProfile().subscribe({
       next: (data: UserProfileModel) => {
-        this.profile = data;
+        this.profile = { ...data }; // Asigna el perfil actual
+        this.originalProfile = { ...data }; // Guarda una copia para cancelar cambios
         this.isLoading = false;
       },
       error: (err) => {
@@ -59,42 +64,35 @@ sections = [
         this.error = 'No se pudo cargar el perfil.';
         this.isLoading = false;
         this.snackBar.open(this.error, 'Cerrar', { duration: 3000 });
-      }
+      },
     });
+  }
+
+  enableEditing(): void {
+    this.isEditing = true;
   }
 
   saveChanges(): void {
     if (this.profile) {
       this.profileService.updateProfile(this.profile).subscribe({
         next: () => {
+          this.originalProfile = { ...this.profile }; // Actualiza la copia original
+          this.isEditing = false;
           this.snackBar.open('Cambios guardados exitosamente.', 'Cerrar', { duration: 3000 });
         },
         error: (err) => {
           console.error('Error al guardar los cambios:', err);
           this.snackBar.open('No se pudieron guardar los cambios.', 'Cerrar', { duration: 3000 });
-        }
+        },
       });
     }
   }
-  
+
   cancelChanges(): void {
-    this.fetchProfile(); // Vuelve a cargar el perfil original
-    this.snackBar.open('Cambios cancelados.', 'Cerrar', { duration: 3000 });
+    if (this.originalProfile) {
+      this.profile = { ...this.originalProfile }; // Restaura los datos originales
+    }
+    this.isEditing = false; // Desactiva el modo de edición
+    this.snackBar.open('Edición cancelada.', 'Cerrar', { duration: 3000 });
   }
-  
-
-  toggleSidebar() {
-    this.isCollapsed = !this.isCollapsed;
-  }
-
-
-  setActive(section: string) {
-    this.activeSection = section;
-  }
-
-  logout(): void {
-    this.authService.logout(); // Limpia el estado de autenticación
-    this.router.navigate(['/auth/login']); // Redirige al login
-  }
-
 }

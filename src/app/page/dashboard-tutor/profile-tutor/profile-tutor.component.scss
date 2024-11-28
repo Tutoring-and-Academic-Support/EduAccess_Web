@@ -1,28 +1,31 @@
-/* General styles for the profile */
 form {
   max-width: 600px;
   margin: 0 auto;
-}
 
-input {
-  transition: border-color 0.3s, box-shadow 0.3s;
+  .form-input {
+    transition: background-color 0.3s, border-color 0.3s;
 
-  &:focus {
-    border-color: #2563eb; /* Blue */
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3); /* Blue shadow */
-  }
+    &[readonly] {
+      background-color: #f3f4f6; /* Fondo claro */
+      color: #6b7280; /* Texto gris */
+      cursor: not-allowed;
+    }
 
-  &:disabled {
-    background-color: #f3f4f6; /* Light gray */
-    color: #6b7280; /* Gray text */
-    cursor: not-allowed;
+    &:focus {
+      border-color: #3b82f6; /* Azul */
+      background-color: #eef6ff; /* Fondo azul claro */
+    }
   }
 }
 
 button {
-  transition: background-color 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
-    filter: brightness(90%);
+    transform: scale(1.02); /* Efecto flotante */
   }
 }
