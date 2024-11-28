@@ -37,11 +37,12 @@
 
     <!-- Menú de navegación -->
     <ul class="menu flex-1 space-y-4 px-4 py-2">
-      <li class="menu-item" *ngFor="let section of sections">
+      <li class="menu-item">
         <a
           [routerLink]="section.link"
           [class.active]="activeSection === section.name"
           class="menu-link flex items-center space-x-3 py-2 px-4 rounded-lg hover:bg-blue-700 transition"
+          *ngFor="let section of sections"
           (click)="setActive(section.name)"
         >
           <i [class]="section.icon"></i>
@@ -74,73 +75,8 @@
     <h1 class="text-4xl font-bold text-gray-800 mb-6">Tablero</h1>
     <hr class="border-gray-300 mb-6" />
 
-    <!-- Barra de búsqueda -->
-    <div>
-  <!-- Campo de búsqueda 
-  <div class="flex items-center bg-white shadow-md rounded-lg p-2 w-3/4">
-    <i class="fas fa-search text-gray-500 mr-2"></i>
-    <input
-      type="text"
-      placeholder="Buscar tu plan o curso"
-      class="w-full outline-none text-gray-700"
-      (input)="buscarCurso($event.target.value)"
-    />
-  </div>-->
-
-  <!-- Desplegable para ciclos 
-  <div class="flex items-center gap-2">
-    <select
-      class="form-select bg-white shadow-md px-4 py-2 rounded-lg border"
-      (change)="filtrarCursosPorCiclo($event.target.value)"
-    >
-      <option value="">Todos los ciclos</option>
-      <option value="1">Ciclo 1</option>
-      <option value="2">Ciclo 2</option>
-      <option value="3">Ciclo 3</option>
-      <option value="4">Ciclo 4</option>
-    </select>
-  </div>-->
-  <!-- Campo de búsqueda -->
-
-<!-- Desplegable para ciclos -->
-<select
-class="form-select bg-white shadow-md px-4 py-2 rounded-lg border"
-(change)="filtrarCursosPorCiclo($event)"
->
-<option value="">Todos los ciclos</option>
-<option value="1">Ciclo 1</option>
-<option value="2">Ciclo 2</option>
-<option value="3">Ciclo 3</option>
-<option value="4">Ciclo 4</option>
-</select>
-
-</div>
-
-
-    <!-- Cursos -->
-    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div
-        class="course-card bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105"
-        *ngFor="let curso of cursos"
-      >
-      <!-- Encabezado con imagen -->
-      <div
-        class="course-image h-32 bg-cover bg-center"
-         [ngStyle]="{ 'background-image': 'url(' + curso.imagen + ')' }"
-      ></div>
-      <div class="p-4">
-        <h2 class="text-lg font-bold text-gray-800 mb-2">{{ curso.nombre }}</h2>
-        <p class="text-gray-600 text-sm">{{ curso.descripcion }}</p>
-      </div>
-        <div class="flex items-center justify-center mt-4">
-          <button
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-200"
-            (click)="verCurso(curso)"
-          >
-            Ver Curso
-          </button>
-        </div>
-      </div>
-    </section>
+      
+    <!-- perfil -->
+   
   </main>
 </div>

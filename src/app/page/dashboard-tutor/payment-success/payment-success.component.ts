@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/*import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PlanService } from '../../../core/service/plan.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -50,7 +50,7 @@ export class PaymentSuccessComponent implements OnInit {
           this.router.navigate(['/dashboard']);
         }
       });
-    }*/
+    }
       ngOnInit(): void {
         // Captura el token desde los parámetros de la URL
         this.route.queryParams.subscribe(params => {
@@ -81,10 +81,64 @@ export class PaymentSuccessComponent implements OnInit {
     
       redirectToInvite(): void {
         if (this.token) {
-          this.router.navigate(['/invitar-estudiantes']);
+          this.router.navigate(['/dashboard-tutor/invitar-estudiantes']);
         } else {
           this.snackBar.open('No se puede redirigir. Información de pago incompleta.', 'Cerrar', { duration: 3000 });
         }
       }
       
+}*/
+
+// src/app/page/dashboard-tutor/payment-success/payment-success.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PlanService } from '../../../core/service/plan.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../../../core/service/auth.service';
+
+@Component({
+  selector: 'app-payment-success',
+  standalone: true,
+  templateUrl: './payment-success.component.html',
+  styleUrls: ['./payment-success.component.scss']
+})
+export class PaymentSuccessComponent implements OnInit {
+
+  constructor(
+    private route: ActivatedRoute,
+    private planService: PlanService,
+    public router: Router,
+    private snackBar: MatSnackBar,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      const token = params['token'];
+      if (token) {
+        const idPlan = localStorage.getItem('planAdquirido');
+        if (idPlan) {
+          this.planService.captureOrder(token, parseInt(idPlan)).subscribe({
+            next: () => {
+              this.snackBar.open('Pago exitoso. ¡Gracias!', 'Cerrar', { duration: 3000 });
+              this.authService.updatePaymentStatus('COMPLETED');
+              this.router.navigate(['/dashboard-tutor/invitar-estudiantes']);
+            },
+            error: (error) => {
+              console.error('Error al capturar el pago:', error);
+              this.snackBar.open('Error al procesar el pago. Por favor, inténtalo de nuevo.', 'Cerrar', { duration: 3000 });
+              this.router.navigate(['/dashboard-tutor']);
+            }
+          });
+        } else {
+          this.snackBar.open('No se encontró información del plan adquirido.', 'Cerrar', { duration: 3000 });
+          this.router.navigate(['/dashboard-tutor']);
+        }
+      } else {
+        this.snackBar.open('Información de pago incompleta.', 'Cerrar', { duration: 3000 });
+        this.router.navigate(['/dashboard-tutor']);
+      }
+    });
+  }
 }

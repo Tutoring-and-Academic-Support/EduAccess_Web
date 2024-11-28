@@ -39,7 +39,7 @@ payPlan(idPlan: number): Observable<string> {
 
   
 
-captureOrder(token: string): Observable<any> {
+captureOrder(token: string, idPlan: number): Observable<any> {
   return this.http.post(`${this.paypalURL}/capture-order`, { token }, { responseType: 'text' });
 }
   

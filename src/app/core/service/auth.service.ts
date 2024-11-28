@@ -47,6 +47,12 @@ isAuthenticated(): boolean {
     }
   }
 
+  
+  // Método de login
+  login(email: string, password: string): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.apiURL}/login`, { email, password });
+    }
+
  // Método de registro para el tutor
   registerTutor(tutorData: any): Observable<any> {
     return this.http.post(`${this.api_dos_URL}/tutor`, tutorData, { responseType: 'text' });
@@ -71,7 +77,7 @@ isAuthenticated(): boolean {
   }
 
   getUserId(): number | null {
-  const authData = this.storageService.getAuthData();
+ const authData = this.storageService.getAuthData();
   if (authData && authData.token) {
     try {
       const decoded: any = jwtDecode(authData.token);
@@ -84,15 +90,25 @@ isAuthenticated(): boolean {
   return null;
 }
 
+  // Obtener el estado de pago
+  isPaymentComplete(): boolean {
+    return this.storageService.getAuthData()?.paymentStatus === 'COMPLETED';
+  }
+
+  // Actualizar el estado de pago
+  updatePaymentStatus(status: string): void {
+    const authData = this.storageService.getAuthData();
+    if (authData) {
+      authData.paymentStatus = status;
+      this.storageService.setAuthData(authData);
+    }
+  }
+  
 
   // Logout
   logout(): void {
     this.storageService.clearAuthData();
   }
 
-  // Método de login
-  login(email: string, password: string): Observable<AuthResponse> {
-  return this.http.post<AuthResponse>(`${this.apiURL}/login`, { email, password });
-  }
   
 }

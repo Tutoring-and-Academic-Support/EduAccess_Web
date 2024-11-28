@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
-
+/*
   canActivate(route: ActivatedRouteSnapshot): boolean {
     if (this.authService.isAuthenticated()) {
       const expectedRole = route.data['expectedRole'];
@@ -31,5 +31,13 @@ export class AuthGuard implements CanActivate {
       this.router.navigate(['/auth/login']);
       return false;
     }
-  }
+  }*/
+
+    canActivate(): boolean {
+      if (this.authService.isAuthenticated()) {
+        return true;
+      }
+      this.router.navigate(['/auth/login']);
+      return false;
+    }
 }

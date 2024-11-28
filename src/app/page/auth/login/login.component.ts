@@ -111,13 +111,17 @@ export class LoginComponent implements OnInit {
           .afterDismissed()
           .subscribe(() => {
             const userRole = response.role;
-            this.router.navigate(
-              userRole === 'TUTOR'
-                ? ['/dashboard']
-                : userRole === 'ESTUDIANTE'
-                ? ['/student-dashboard']
-                : ['/']
-            );
+            if (userRole === 'TUTOR') {
+              if (this.authService.isPaymentComplete()) {
+                this.router.navigate(['/dashboard-tutor/cursos']);
+              } else {
+                this.router.navigate(['/dashboard-tutor']);
+              }
+            } else if (userRole === 'ESTUDIANTE') {
+              this.router.navigate(['/student-dashboard']);
+            } else {
+              this.router.navigate(['/']);
+            }
           });
       },
       error: (error) => {
