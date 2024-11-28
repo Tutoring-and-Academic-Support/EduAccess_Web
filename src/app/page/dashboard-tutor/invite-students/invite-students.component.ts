@@ -126,7 +126,6 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterLink,
   ],
   templateUrl: './invite-students.component.html',
   styleUrls: ['./invite-students.component.scss']
