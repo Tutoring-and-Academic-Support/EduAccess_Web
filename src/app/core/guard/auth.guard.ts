@@ -1,3 +1,20 @@
+/*import { CanActivateFn, Router } from '@angular/router';
+import { AuthService } from '../service/auth.service';
+import { inject } from '@angular/core';
+
+export const authGuard: CanActivateFn = (route, state) => {
+  const authService = inject(AuthService);
+  const router =inject(Router);
+
+  if(authService.isAuthenticated()) {
+    return true;
+  }else{
+    router.navigate(['/auth/login']);
+    return false;
+  }
+
+};*/
+
 // src/app/core/guard/auth.guard.ts
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
@@ -14,7 +31,7 @@ export class AuthGuard implements CanActivate {
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
-/*
+
   canActivate(route: ActivatedRouteSnapshot): boolean {
     if (this.authService.isAuthenticated()) {
       const expectedRole = route.data['expectedRole'];
@@ -31,13 +48,5 @@ export class AuthGuard implements CanActivate {
       this.router.navigate(['/auth/login']);
       return false;
     }
-  }*/
-
-    canActivate(): boolean {
-      if (this.authService.isAuthenticated()) {
-        return true;
-      }
-      this.router.navigate(['/auth/login']);
-      return false;
-    }
+  }
 }
