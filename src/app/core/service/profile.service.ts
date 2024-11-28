@@ -14,4 +14,11 @@ export class ProfileService {
   getProfile(): Observable<UserProfile> {
     return this.http.get<UserProfile>(this.apiUrl);
   }
+
+
+  // Actualizar perfil
+  updateProfile(profile: UserProfile): Observable<UserProfile> {
+    return this.http.put<UserProfile>(this.apiUrl, profile);
+  }
+  
 }

@@ -1,0 +1,28 @@
+/* General styles for the profile */
+form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+input {
+  transition: border-color 0.3s, box-shadow 0.3s;
+
+  &:focus {
+    border-color: #2563eb; /* Blue */
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3); /* Blue shadow */
+  }
+
+  &:disabled {
+    background-color: #f3f4f6; /* Light gray */
+    color: #6b7280; /* Gray text */
+    cursor: not-allowed;
+  }
+}
+
+button {
+  transition: background-color 0.3s;
+
+  &:hover {
+    filter: brightness(90%);
+  }
+}

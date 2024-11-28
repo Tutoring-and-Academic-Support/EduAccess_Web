@@ -6,14 +6,15 @@ import { AuthService } from '../../../core/service/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { MatSpinner } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-tutor',
   standalone: true,
   imports: [
       MatSpinner,
-      RouterLink,
-      CommonModule
+      CommonModule,
+      FormsModule,
   ],
   templateUrl: './profile-tutor.component.html',
   styleUrl: './profile-tutor.component.scss'
@@ -61,6 +62,26 @@ sections = [
       }
     });
   }
+
+  saveChanges(): void {
+    if (this.profile) {
+      this.profileService.updateProfile(this.profile).subscribe({
+        next: () => {
+          this.snackBar.open('Cambios guardados exitosamente.', 'Cerrar', { duration: 3000 });
+        },
+        error: (err) => {
+          console.error('Error al guardar los cambios:', err);
+          this.snackBar.open('No se pudieron guardar los cambios.', 'Cerrar', { duration: 3000 });
+        }
+      });
+    }
+  }
+  
+  cancelChanges(): void {
+    this.fetchProfile(); // Vuelve a cargar el perfil original
+    this.snackBar.open('Cambios cancelados.', 'Cerrar', { duration: 3000 });
+  }
+  
 
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
