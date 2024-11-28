@@ -151,6 +151,9 @@ import { CursosComponent } from './page/dashboard-tutor/cursos/cursos.component'
 import { ProfileTutorComponent } from './page/dashboard-tutor/profile-tutor/profile-tutor.component';
 import { PaymentSuccessComponent } from './page/dashboard-tutor/payment-success/payment-success.component';
 import { DashboardTutorComponent } from './page/dashboard-tutor/dashboard-tutor/dashboard-tutor.component';
+import { DashboardStudentComponent } from './page/dashboard-student/dashboard-student/dashboard-student.component';
+import { ProfileStudentComponent } from './page/dashboard-student/profile-student/profile-student.component';
+
 
 export const routes: Routes = [
   { 
@@ -198,8 +201,33 @@ export const routes: Routes = [
         component: ProfileTutorComponent,
         canActivate: [PaymentGuard]
       },
+     // { path: 'cursos/:id', component: CursoDetalleComponent }, 
+
     ],
   },
+
+
+
+  //Rutas del estudiante
+  {
+    path: 'dashboard-student',
+    component: DashboardStudentComponent,
+    canActivate: [AuthGuard],
+    data: { expectedRole: 'ESTUDIANTE' },
+    children: [
+      {
+        path: '',
+        component: ProfileStudentComponent // Muestra los planes
+      },
+      {
+        path: 'perfil-student',
+        component: ProfileStudentComponent,
+      },
+     // { path: 'cursos/:id', component: CursoDetalleComponent }, 
+
+    ],
+  },
+
   // Otras rutas...
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
   { path: '**', redirectTo: '/inicio' }

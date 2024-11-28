@@ -1,62 +1,79 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormArray, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormArray, Validators, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { InvitacionService } from '../../../core/service/invitacion.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PlanService } from '../../../core/service/plan.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
 import { AuthService } from '../../../core/service/auth.service';
+import { CursoService } from '../../../core/service/curso.service';
+import { Curso } from '../../../shared/model/curso.model';
 @Component({
   selector: 'app-invite-students',
   standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterLink,
+    FormsModule
   ],
   templateUrl: './cursos.component.html',
   styleUrls: ['./cursos.component.scss']
 })
-export class CursosComponent {
-// In TutorLayoutComponent or wherever your sidebar logic is
-sections = [
-  { name: 'cursos', label: 'Cursos', link: '/dashboard-tutor/cursos', icon: 'fas fa-book' },
-  { name: 'invitar-estudiantes', label: 'Invitar', link: '/dashboard-tutor/invitar-estudiantes', icon: 'fas fa-user-plus' },
-  { name: 'perfil', label: 'Perfil', link: '/dashboard-tutor/perfil', icon: 'fas fa-user' },
-];
+export class CursosComponent implements OnInit{
 
-cursos = [
-  { nombre: 'Curso 1', descripcion: 'Aprende los fundamentos de Angular.', imagen: 'assets/images/curso1.jpg', ciclo: 1 },
-  { nombre: 'Curso 2', descripcion: 'Conoce conceptos avanzados de Java.', imagen: 'assets/images/curso2.jpg', ciclo: 2 },
-  { nombre: 'Curso 3', descripcion: 'Crea aplicaciones con Spring Boot.', imagen: 'assets/images/curso3.jpg', ciclo: 3 },
-  { nombre: 'Curso 4', descripcion: 'Introducción a bases de datos SQL.', imagen: 'assets/images/curso4.jpg', ciclo: 1 },
-  { nombre: 'Curso 5', descripcion: 'Dominando Python para Machine Learning.', imagen: 'assets/images/curso5.jpg', ciclo: 4 },
-  { nombre: 'Curso 6', descripcion: 'Desarrollo web con React.', imagen: 'assets/images/curso6.jpg', ciclo: 2 },
-];
+
+
+cursos: Curso[] = []; // Tipado correcto
+filteredCursos: Curso[] = []; // Tipar explícitamente como Curso[]
+ciclos: number[] = [1, 2, 3, 4];
+selectedCiclo = 0; // 0 significa 'Todos los ciclos'
+
 
   isCollapsed: boolean = false;
   activeSection: string = 'dashboard';
 
   constructor(
     private fb: FormBuilder,
-    private invitacionService: InvitacionService,
     private snackBar: MatSnackBar,
-    private planService: PlanService,
-    private authService: AuthService,
     private router: Router, 
-
+    private cursoService: CursoService,
+    
   ) {}
   
-  toggleSidebar() {
-    this.isCollapsed = !this.isCollapsed;
+
+  
+
+  ngOnInit(): void {
+    this.loadCursos();
   }
 
-  setActive(section: string) {
-    this.activeSection = section;
+  loadCursos(): void {
+    this.cursoService.getCursos().subscribe(
+      (cursos: Curso[]) => {
+        this.cursos = cursos;
+        console.log('Cursos cargados:', this.cursos); // Para depuración
+        this.applyFilter();
+      },
+      (error) => {
+        console.error('Error al obtener los cursos:', error);
+      }
+    );
   }
 
-  verCurso(curso: any): void {
-    // Implementa la lógica para ver detalles del curso
+  applyFilter(): void {
+    if (this.selectedCiclo === 0) {
+      this.filteredCursos = this.cursos;
+    } else {
+      this.filteredCursos = this.cursos.filter(curso => curso.ciclo === this.selectedCiclo);
+    }
+    console.log('Cursos filtrados:', this.filteredCursos); // Para depuración
   }
 
+  onCicloChange(): void {
+    this.applyFilter();
+  }
+
+  verCurso(curso: Curso): void {
+    this.router.navigate(['/dashboard-tutor/cursos', curso.id]);
+  }
 }

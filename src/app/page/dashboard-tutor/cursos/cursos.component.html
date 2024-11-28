@@ -1,23 +1,41 @@
-<h1 class="text-4xl font-bold text-gray-800 mb-6">Mis Cursos</h1>
+<h1 class="text-4xl font-bold text-gray-800 mb-6 text-center">Explora Nuestros Cursos</h1>
 <hr class="border-gray-300 mb-6" />
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  <div
-    class="course-card bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105"
-    *ngFor="let curso of cursos"
+<!-- Filtro de ciclos -->
+<div class="mb-6 flex items-center justify-center">
+  <label for="cicloSelect" class="mr-2 font-medium text-lg">Filtrar por ciclo:</label>
+  <select
+    id="cicloSelect"
+    [(ngModel)]="selectedCiclo"
+    (change)="onCicloChange()"
+    class="border border-gray-300 rounded-lg px-4 py-2 text-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-200"
   >
-    <!-- Encabezado con imagen -->
+    <option [ngValue]="0">Todos</option>
+    <option *ngFor="let ciclo of ciclos" [ngValue]="ciclo">Ciclo {{ ciclo }}</option>
+  </select>
+</div>
+
+<!-- Lista de cursos -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  <div
+    class="course-card bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300"
+    *ngFor="let curso of filteredCursos"
+  >
+    <!-- Imagen del curso -->
     <div
-      class="course-image h-32 bg-cover bg-center"
+      class="course-image h-48 bg-cover bg-center"
       [ngStyle]="{ 'background-image': 'url(' + curso.imagen + ')' }"
     ></div>
-    <div class="p-4">
-      <h2 class="text-lg font-bold text-gray-800 mb-2">{{ curso.nombre }}</h2>
-      <p class="text-gray-600 text-sm">{{ curso.descripcion }}</p>
+    <!-- Detalles del curso -->
+    <div class="p-6">
+      <h2 class="text-xl font-semibold text-gray-800 mb-3">{{ curso.nombreCurso }}</h2>
+      <p class="text-gray-600 text-base mb-4">{{ curso.descripcion }}</p>
+      <p class="text-sm font-medium text-blue-600">Ciclo: {{ curso.ciclo }}</p>
     </div>
-    <div class="flex items-center justify-center mt-4">
+    <!-- Botón Ver Curso -->
+    <div class="p-4 bg-gray-100">
       <button
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-200"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md w-full"
         (click)="verCurso(curso)"
       >
         Ver Curso

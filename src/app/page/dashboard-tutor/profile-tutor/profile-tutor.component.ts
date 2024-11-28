@@ -12,7 +12,6 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-profile-tutor',
   standalone: true,
   imports: [
-      MatSpinner,
       CommonModule,
       FormsModule,
   ],
