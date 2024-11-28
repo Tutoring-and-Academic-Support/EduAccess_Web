@@ -6,20 +6,26 @@
 <!-- Planes -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
   <div
-    class="plan-card bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
+    class="plan-card bg-primary text-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
     *ngFor="let plan of plans"
   >
-    <h2 class="text-2xl font-bold text-blue-600 mb-2 text-center">{{ plan.nombre }}</h2>
-    <p class="text-gray-600 text-lg text-center mb-4">
-      Cantidad de estudiantes: {{ plan.cantidadEstudiantes }}
+    <h2 class="plan-title text-lg font-bold mb-4 text-center">{{ plan.nombre }}</h2>
+    <ul class="plan-details list-disc list-inside mb-4">
+      <li>Acceso y gestión de usuarios.</li>
+      <li>Supervisión del progreso de los estudiantes.</li>
+      <li>Panel de administración intuitivo para empresas.</li>
+      <li>Controla y optimiza el aprendizaje de tus estudiantes.</li>
+    </ul>
+    <p class="plan-students text-sm font-bold mb-2 text-center">{{ plan.cantidadEstudiantes }} estudiantes por S/.{{ plan.precio }}</p>
+    <p class="plan-discount text-xs text-center text-red-300">
+      ANTES: {{ plan.cantidadEstudiantes }} estudiantes por mas precio  
     </p>
-    <p class="text-gray-600 text-lg text-center mb-4">Precio: S/. {{ plan.precio }}</p>
     <div class="flex items-center justify-center mt-4">
       <button
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-200"
+        class="btn-comprar bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-200"
         (click)="selectPlan(plan)"
       >
-        Seleccionar Plan
+        COMPRAR
       </button>
     </div>
   </div>

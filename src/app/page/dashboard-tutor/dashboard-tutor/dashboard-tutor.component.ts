@@ -113,6 +113,10 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard-tutor',
+  standalone: true,
+  imports: [
+    CommonModule
+  ],
   templateUrl: './dashboard-tutor.component.html',
   styleUrls: ['./dashboard-tutor.component.scss']
 })
@@ -136,6 +140,7 @@ export class DashboardTutorComponent implements OnInit {
   loadPlans() {
     this.planService.getPlans().subscribe(
       (plans) => {
+        console.log('Planes cargados:', plans); // Verifica que los datos lleguen
         this.plans = plans;
       },
       (error) => {
@@ -143,6 +148,7 @@ export class DashboardTutorComponent implements OnInit {
       }
     );
   }
+  
 
   selectPlan(plan: Plan) {
     this.planService.payPlan(plan.idPlan).subscribe(
