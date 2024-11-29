@@ -1,7 +1,7 @@
 // src/app/core/service/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 
 import { environment } from '../../../environments/environment';
@@ -16,12 +16,21 @@ import { RegisterStudentRequest } from '../../shared/model/register-student-requ
 export class AuthService {
   private apiURL = `${environment.baseURL}/auth`;
   private api_dos_URL = `${environment.baseURL}/registrar`;
+  private paymentStatusSubject: BehaviorSubject<boolean>;
 
   constructor(
     private http: HttpClient,
     private storageService: StorageService
-  ) {}
+  ) {
+    const initialStatus = this.isPaymentComplete();
+    this.paymentStatusSubject = new BehaviorSubject<boolean>(initialStatus); 
 
+  }
+  
+  // Observable para que otros componentes se suscriban
+  get paymentStatus$(): Observable<boolean> {
+    return this.paymentStatusSubject.asObservable();
+  }
 
 isAuthenticated(): boolean {
   const authData = this.storageService.getAuthData();
@@ -67,8 +76,12 @@ isAuthenticated(): boolean {
   }
 
   // Almacenar los datos de autenticación
+  // Almacenar los datos de autenticación
   saveAuthData(data: AuthResponse): void {
     this.storageService.setAuthData(data);
+    // Actualizar el estado de pago en el BehaviorSubject
+    const isComplete = data.paymentStatus === 'COMPLETED';
+    this.paymentStatusSubject.next(isComplete);
   }
 
   // Obtener el rol del usuario
@@ -101,9 +114,10 @@ isAuthenticated(): boolean {
     if (authData) {
       authData.paymentStatus = status;
       this.storageService.setAuthData(authData);
+      // Emitir el nuevo estado de pago
+      this.paymentStatusSubject.next(status === 'COMPLETED');
     }
-  }
-  
+  }  
 
   // Logout
   logout(): void {

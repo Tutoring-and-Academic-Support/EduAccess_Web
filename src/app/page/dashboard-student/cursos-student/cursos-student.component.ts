@@ -9,18 +9,19 @@ import { AuthService } from '../../../core/service/auth.service';
 import { CursoService } from '../../../core/service/curso.service';
 import { Curso } from '../../../shared/model/curso.model';
 @Component({
-  selector: 'app-invite-students',
+  selector: 'app-cursos-student',
   standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule
   ],
-  templateUrl: './cursos.component.html',
-  styleUrls: ['./cursos.component.scss']
+  templateUrl: './cursos-student.component.html',
+  styleUrl: './cursos-student.component.scss'
 })
-export class CursosComponent implements OnInit{
+export class CursosStudentComponent {
 
+  
 cursos: Curso[] = []; // Tipado correcto
 filteredCursos: Curso[] = []; // Tipar explícitamente como Curso[]
 ciclos: number[] = [1, 2, 3, 4];
@@ -101,6 +102,7 @@ selectedCiclo = 0; // 0 significa 'Todos los ciclos'
   }
 
   verCurso(curso: Curso): void {
-    this.router.navigate(['/dashboard-tutor/cursos', curso.id]);
+    this.router.navigate(['/dashboard-student/cursos', curso.id]);
   }
+
 }

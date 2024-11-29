@@ -81,3 +81,8 @@
   background-color: #ffffff; /* Fondo de las opciones */
   color: #003366; /* Texto de las opciones */
 }
+.main-content {
+  overflow-y: auto; /* Habilita el desplazamiento vertical */
+  height: calc(100vh - 80px); /* Ajusta la altura según sea necesario */
+}
+

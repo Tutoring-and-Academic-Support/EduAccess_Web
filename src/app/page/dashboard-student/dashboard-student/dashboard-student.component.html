@@ -32,9 +32,7 @@
           class="btn w-full bg-blue-500 hover:bg-blue-700 py-2 rounded-lg shadow-md transition-opacity duration-300"
           [class.opacity-0]="isCollapsed"
           [class.opacity-100]="!isCollapsed"
-          routerLink="/dashboard-tutor/perfil"
-          *ngIf="authService.isPaymentComplete()"
-        >
+          routerLink="/dashboard-student/perfil-student"        >
           Ver Perfil
         </button>
       </div>
