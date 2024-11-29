@@ -22,11 +22,15 @@ export class DashboardStudentComponent implements OnInit {
   constructor(public authService: AuthService, private router: Router) {}
 
   ngOnInit() {
+    if (this.authService.isPaymentComplete()) {
       this.sections = [
-        { name: 'cursos-student', label: 'Cursos', link: '/dashboard-student/cursos-student', icon: 'fas fa-book' },
-        { name: 'perfil-student', label: 'Perfil', link: '/dashboard-student/perfil-student', icon: 'fas fa-user' },
+        { name: 'cursos-student', label: 'Cursos', link: '/dashboard-student/cursos', icon: 'fas fa-book' },
+        { name: 'perfil-student', label: 'Perfil', link: '/dashboard-student/perfil', icon: 'fas fa-user' },
       ];
-      }
+    } else {
+      this.sections = [];
+    }
+  }
 
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;

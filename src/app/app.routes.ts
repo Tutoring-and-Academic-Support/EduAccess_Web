@@ -153,7 +153,6 @@ import { PaymentSuccessComponent } from './page/dashboard-tutor/payment-success/
 import { DashboardTutorComponent } from './page/dashboard-tutor/dashboard-tutor/dashboard-tutor.component';
 import { DashboardStudentComponent } from './page/dashboard-student/dashboard-student/dashboard-student.component';
 import { ProfileStudentComponent } from './page/dashboard-student/profile-student/profile-student.component';
-import { CursosStudentComponent } from './page/dashboard-student/cursos-student/cursos-student.component';
 
 
 export const routes: Routes = [
@@ -170,9 +169,9 @@ export const routes: Routes = [
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'register-tutor', component: RegisterTutorComponent },
+      { path: 'register-student', component: RegisterStudentComponent },
     ],
   },
-
   {
     path: 'dashboard-tutor',
     component: DashboardTutorLayoutComponent,
@@ -207,6 +206,8 @@ export const routes: Routes = [
     ],
   },
 
+
+
   //Rutas del estudiante
   {
     path: 'dashboard-student',
@@ -216,24 +217,15 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: CursosStudentComponent// Muestra los planes
+        component: ProfileStudentComponent // Muestra los planes
       },
       {
         path: 'perfil-student',
         component: ProfileStudentComponent,
       },
-      {
-        path: 'cursos-student',
-        component: CursosStudentComponent,
-      },
      // { path: 'cursos/:id', component: CursoDetalleComponent }, 
 
     ],
-  },
-
-  {
-    path: 'registro-estudiante',
-    component: RegisterStudentComponent
   },
 
   // Otras rutas...
