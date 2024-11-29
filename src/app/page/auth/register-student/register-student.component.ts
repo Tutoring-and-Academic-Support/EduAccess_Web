@@ -84,13 +84,7 @@ export class RegisterStudentComponent implements OnInit {
   }
   
 
-/*************  ✨ Codeium Command ⭐  *************/
-  /**
-   * Registra al estudiante y, si el registro es exitoso, autentica al usuario automáticamente.
-   * Si el registro falla, muestra un mensaje de error con la descripción del problema.
-   * Si el formulario no es válido, muestra un mensaje de error.
-   */
-/******  fd8e21d8-e5be-4e84-9e9b-d1a744270769  *******/  onSubmit(): void {
+ onSubmit(): void {
     if (this.registerForm.valid && this.token) {
       this.isSubmitting = true;
       const registroData: RegisterStudentRequest = {
@@ -110,7 +104,7 @@ export class RegisterStudentComponent implements OnInit {
               const userRole = response.role;
               this.router.navigate(
                 userRole === 'ESTUDIANTE'
-                  ? ['/student-dashboard']
+                  ? ['/auth/login']
                   : ['/']
               );
             },
